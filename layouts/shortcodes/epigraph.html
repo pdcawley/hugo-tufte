@@ -1,12 +1,13 @@
 <div class="epigraph">
 <blockquote>
-{{ .Inner | $.Page.RenderString (dict "display" "block") }}
+{{ $t := .Get "type" }}
+{{ if eq $t "compact"  }}{{ .Inner }}{{ else }}<p>{{ .Inner }}</p>{{ end }}
 {{ if .IsNamedParams }}
-    <footer>
-    {{- with .Get "author" -}}{{ . }}{{- end -}}
-    {{- with .Get "cite" -}}, <cite>{{ . | markdownify }}</cite>{{- end -}}
-    {{- with .Get "detail" -}}, {{ . | markdownify }}{{- end -}}
-    </footer>
+<footer>
+{{ with .Get "pre" }}{{ . }}{{ end }}
+{{ with .Get "cite" }}<cite>{{ . | markdownify }}</cite>{{ end }}
+{{ with .Get "post" }}{{ . }}{{ end }}
+</footer>
 {{ end }}
-</blockquote>
+<blockquote>
 </div>
