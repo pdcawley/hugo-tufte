@@ -1,13 +1,25 @@
-{{ define "main" }}
-  <div id="layout" class="pure-g">
-    <article class="pure-u-1">
-      {{ partial "brand.html" . }}
-      
-      <section><h2 id="title">Looks like there is a problem in the url... <br/>
-        <a href="{{ "" | relURL}}">Go Home ? </a></h2></section>
-      <section>
-        {{ partial "footer.html" . }}
-      </section>
-    </article>
-  </div>
-{{ end }}
+<!DOCTYPE html>
+<html lang="en-us">
+  {{ partial "head.html" . }}
+  <!-- Need to add option to toggle width -->
+  <body class="default-width">
+    {{ partial "body-header.html" . }}
+    <main class="group" role="main" aria-label="Blog posting">
+      <article role="article">
+        <header>
+          <h1>{{ .Title }}</h1>
+        </header>
+
+        <a name="skip-to-content"> </a>
+        <section class="content">
+          {% marginfigure "logo.jpg" "The Chicken of Judgement has found nothing." "A large yellow wooden abstract chicken stares at you amongst a field of game pieces." %}
+
+          <p>Welp, it looks like we couldn't find what you requested.</p>
+
+          <p>Maybe try a site search? Or [contacting me](/contact-me) to see if I can help you find it. <em>I did migrate my site, and while I tried to avoid broken pages, I'm not perfect.</em></p>
+        </section>
+      </article>
+    </main>
+    {{ partial "footer.html" . }}
+  </body>
+</html>
