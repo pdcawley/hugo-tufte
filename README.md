@@ -1,127 +1,69 @@
 # Tufte Hugo Theme
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.0-4baaaa.svg)](code_of_conduct.md) [![Test Build](https://github.com/loikein/hugo-tufte/actions/workflows/test-build.yml/badge.svg)](https://github.com/loikein/hugo-tufte/actions/workflows/test-build.yml) [![Netlify Status](https://api.netlify.com/api/v1/badges/0a3e11e2-0209-40bb-8570-c3eb9b8471dc/deploy-status)](https://app.netlify.com/sites/huto-tufte/deploys)
-
-## History of this project
-
 Hugo-Tufte is a minimalist blog-like theme for the
 [static site generator Hugo](https://gohugo.io) that
 attempts to be a faithful implementation of the
-[Tufte-css](https://github.com/edwardtufte/tufte-css) project. The current version supports mathematical typesetting via [KaTeX](https://katex.org/).
+[Tufte-css](https://github.com/edwardtufte/tufte-css) project.
+It supports mathematical typesetting via [MathJax](https://www.mathjax.org).
+By utilizing copious partial templates the theme is largely customizable.
 
-- The original repo: [shawnohare/hugo-tufte](https://github.com/shawnohare/hugo-tufte)
-- Second repo: [slashformotion/hugo-tufte](https://github.com/slashformotion/hugo-tufte)
-- This ([loikein/hugo-tufte](https://github.com/loikein/hugo-tufte)) is now the _de facto_ third repo although my original intension was only to make a few tweaks.
+## Math
 
-## Quickstart
+Mathjax renders LaTeX written inside of markdown files. LaTeX can be
+written more or less as normal, but inline and display environments that
+start with `\` must be escaped. Some examples:
 
-### Prerequisite: Hugo Extended
+- `This $\LaTeX$ will be rendered inline.`
+- `This \\(\LaTeX\\) will be rendered inline.`
+- `A simple displayed equation: $$f(x, y) := e^{x^2 - y^2}.$$`
+- `A simple displayed equation: \\[f(x, y) := e^{x^2 - y^2}.\\]`
 
-You'll need to install Hugo Extended for this theme to test it locally, since this theme uses SCSS.
+There currently seems to be some weirdness with other environments,
+such as the `align` environment. These environments will render provided
+they are wrapped in `<p>` tags and blank lines. The snippet below should
+render correctly.
+```
+Let $G$ be a finite group with exponent $2$. Then every element is
+an involution, hence for any $x$, $y$ in $G$ we have:
 
-- On Windows:
-  - Using [Chocolatey](https://chocolatey.org/):
-    ```shell
-    choco install hugo-extended # remember, you might need admin privs
-    ```
-- On macOS:
-  + Using [Homebrew](https://brew.sh/):
-    ```shell
-    brew install hugo
-    ```
+<p>
+\begin{align*}
+  e &= (xy)^2  \\
+  &=xyxy \implies \\
+  y^{-1} &= xyx \implies \\
+  y^{-1}x^{-1} &= xy,
+\end{align*}
+</p>
 
-### Check out the example site
-
-```shell
-git clone https://github.com/loikein/hugo-tufte.git
-cd hugo-tufte/exampleSite
-hugo server --buildDrafts --disableFastRender
+establishing that $G$ is abelian.
 ```
 
-Then open `localhost:1313` or wherever it says in browser.
+## Site Parameters
 
-The showcase posts are:
+The site specific parameters that this theme recognizes are:
 
-- `The big old test page`
-- `Tufte CSS`
-
-### For a new site
-
-```shell
-hugo new site <your-site-name>
-cd <your-site-name>/themes/
-git clone https://github.com/loikein/hugo-tufte.git
-```
-
-Add `theme: 'hugo-tufte'` to your `config.yaml` to let your site know to actually use _this_ theme, specifically.
-
-Then run `hugo server --buildDrafts --disableFastRender` and open `localhost:1313` or wherever it says in browser.
-
-## Features
-
-### Math
-
-In this version, I use [Yihui Xie's method](https://yihui.org/en/2018/07/latex-math-markdown/) to support (almost) seamless LaTeX rendering with [KaTeX](https://katex.org/).
-
-For usage and examples, refer to [./exampleSite/content/posts/tufte-features.md ](https://github.com/loikein/hugo-tufte/blob/main/exampleSite/content/posts/tufte-features.md).
-
-Downside: LaTeX in post title is no longer supported.
-
-### Site Parameters
-
-`params` for this theme are:
-
-- `subtitle` string: If set, displayed under the main title.
-- `showPoweredBy` boolean: If `true`, display a shoutout to Hugo and this theme.
+- `subtitle` string: This is displayed under the main title.
+- `showPoweredBy` boolean: if true, display a shoutout to Hugo and this theme.
 - `copyrightHolder` string: Inserts the value in the default copyright notice.
 - `copyright` string: Custom copyright notice.
-- `math` boolean: Site wide kill switch for Latex support
-- `codeBlocksDark` boolean: If `true`, code blocks will use a dark theme.
-- `marginNoteInd` string: (NEW) Custom indicator for margin notes, with suggestions in comment. (Only displayed on mobile devices or inside `cols` shortcode.)
-- `sansSubtitle` boolean: If `true`, all subtitles (`h2` \& `h3`) will use up-right and sans-serif font. (As seen in _Visual Display of Quantitative Information_.)
-- (`centerArticle` boolean: Not implemented yet)
 
-**Socials**
+## Page Parameters
 
-_(The followings have not been tested for this repo, use at your own risk.)_
-
-You can add links to your social media profile by using thoses parameters:
-
-- `github`: string
-- `gitlab`: string
-- `twitter`: string
-- `linkedin`: string
-- `patreon`: string
-- `youtube`: string
-- `medium`: string
-- `reddit`: string
-- `stackoverflow`: string
-- `instagram`: string
-- `mastodon`: string
-- `orcid`: string
-- `google_scholar`: string
-
-Please see [`exampleSite/config.yaml`](https://github.com/loikein/hugo-tufte/blob/main/exampleSite/config.yaml#L47) to see the full implementation with exemples.
-
-### Page Parameters
-
-- `math` boolean: If `true`, try to render the page's LaTeX code using KaTeX.
-- `meta` boolean: If `true`, display page metadata such as author, date, categories.
-  + `hideDate` boolean: If `true`, do not display a page date in metadata.
-  + `hideReadTime` boolean: if `true`, do not display the page's reading time
-  estimate in metadata.
+- `hideDate` boolean: if true, do not display a page date. When `meta` is set to
+  true, `hideDate` takes greater precedence.
+- `hideReadTime` boolean: if true, do not display the page's reading time
+  estimate. When `meta` is set to true, `hideReadTime` takes greater precedence.
+- `math` boolean: if true, try to render the page's LaTeX code using MatheJax.
+- `meta` boolean: if true, display page metadata such as author, date, categories provided
+  these page parameters exist and are not overridden. Content in the `/post` directory,
+  (i.e., pages of type "post") ignore this parameter.
 - `toc` boolean: if true, display the table of contents for the page.
-- Layout parameters: (NEW)
-  + For more information, see [Hugo's Lookup Order | Hugo](https://gohugo.io/templates/lookup-order/).
-  + `type` string: If set to `book`, layout files in [./layouts/book/](https://github.com/loikein/hugo-tufte/tree/main/layouts/book) will be prioritised.
-  + `layout` string: If set, layout files with the name of this field's value will be prioritised.
 
-### Shortcodes
+## Shortcodes
 
 This theme provides the following shortcodes in an attempt to completely
-support all the features present in the [Tufte-css](https://github.com/edwardtufte/tufte-css) project.
-
-For usage and examples, refer to [./exampleSite/content/posts/tufte-features.md ](https://github.com/loikein/hugo-tufte/blob/main/exampleSite/content/posts/tufte-features.md).
+support all the features present in the
+[Tufte-css](https://github.com/edwardtufte/tufte-css) project.
 
 - `blockquote`
   - **Description**: Wrap text in a blockquote and insert optional
@@ -135,6 +77,57 @@ For usage and examples, refer to [./exampleSite/content/posts/tufte-features.md 
   ```
 
 - `div`
+   - **Description**: This shortcode is provided as a work-around for wrapping
+   complex blocks of markdown in div tags. The wrapped text can
+   include other shortcodes
+   - **Usage**: Identical to the `section` shortcode.
+   Accepts the style parameters `class` and `id`.
+   If only the positional argument `"end"` is passed, a closing tag
+   will be inserted.
+   - **Example**: `{{< div class="my-class" >}}` inserts a
+   `<div class="my-class">` tag, while
+   `{{<div "end" >}}` inserts the closing `</div>` tag.
+
 - `epigraph`
+  - **Description**: Create an epigraph with the wrapped text.
+  - **Usage**: To include a footer with source attribution, pass in the
+  optional named parameters `pre`, `cite`, `post`. These parameters
+  make no styling assumptions, so spacing is important. A more compactly
+  styled epigraph will be used if the `type` parameter is set to `compact`.
+  - **Example**:
+  ```
+  {{% epigraph pre="Author Writer, " cite="Math is Fun" %}}
+  This is an example of an epigraph with some math
+  \\( \mathbb N \subseteq \mathbb R \\)
+  to start the beginning of a section.
+  {{% /epigraph %}}
+  ```
+
 - `marginnote`
+  - **Description**: Wrap text to produce a numberless margin note.
+  - Usage: `{{% marginnote %}}...{{% /marginnote %}}`
+  - **Example**: `{{% marginnote %}}Some marginnote{{% /marginnote%}}`
+
+- `section`
+   - **Description**: This shortcode is provided as a work-around for wrapping
+   complex blocks of markdown in section tags. The wrapped text can
+   include other shortcodes
+   - **Usage**: Accepts the style parameters `class` and `id`.
+   If only the positional argument `"end"` is passed, a closing tag
+   will be inserted.
+   - **Example**: `{{< section class="my-class" >}}` inserts a
+   `<section class="my-class">` tag, while
+   `{{<section "end" >}}` inserts the closing `</section>` tag.
+
+
 - `sidenote`
+  - **Description**: Wrap text to produce an automatically numbered sidenote.
+  - **Usage**: identical to `marginnote`
+  `{{% sidenote %}}...{{% /sidenote %}}`
+  - **Example**: `{{% sidenote %}}Some sidenote{{% /sidenote %}}`
+
+
+## Templates
+TODO
+- [ ] Describe the role of each template file, as commenting within the files
+      themselves seems to break the templates.
