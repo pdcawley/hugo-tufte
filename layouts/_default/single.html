@@ -22,25 +22,6 @@
         ::
         {{- with .Params.tags }}<span id="skip-to-tags">{{ partial "tags.html" . }}</span>{{- end }}
         </p>
-        {{- with .Params.series }}
-          {{- range (where $.Site.Data.series "key" "eq" .) }}
-            <p>
-              {{- $title := .title }}
-              Series: <a name='skip-to-series-navigation' href="{{ "series" | absURL }}/{{ .key | urlize }}" rel="bookmark">{{ $title }}</a>
-              {{- $series := where $.Site.Pages "Params.series" .key }}
-              {{- $prev := where $series ".PublishDate" "lt" $.Page.PublishDate }}
-              {{- range first 1 $prev }}
-                : <a rel="prev" title="{{ .Title }}" href="{{ .Permalink }}">previous in series</a>
-              {{- end}}
-              {{- $next := where $series ".PublishDate" "gt" $.Page.PublishDate }}
-              {{- range last 1 $next }}
-                : <a rel="next" title="{{ .Title }}" href="{{ .Permalink }}">next in series</a>
-              {{- end}}
-              </ul>
-            </p>
-          {{- end}}
-        {{- end }}
-      </nav>
       <nav aria-labelledby="skip-to-related-posts">
         <h2 id="skip-to-related-posts">Related Posts</h2>
         <ul>
