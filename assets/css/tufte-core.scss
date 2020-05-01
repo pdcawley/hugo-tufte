@@ -132,9 +132,9 @@ body > header {
 }
 body > footer { padding-top: 2rem; }
 
-pre, pre code { font-family: $code-font; padding: 0 1.5%; overflow-x: auto; color:$code-color; }
+pre, pre code { font-family: $code-font; padding: 0.8571rem 1.5%; overflow-x: auto; color:$code-color; }
 code { font-family: $code-font; color:$code-color; font-size: 1.1rem; }
-pre code { font-size: 1.0rem; line-height: 1.7142; margin-top: 1.7142rem; display: block; white-space: pre; }
+pre code { font-size: 1.0rem; line-height: 1.7142; margin-top: 0; margin-bottom: 0; display: block; white-space: pre; }
 
 .newthought { font-variant: small-caps; font-size: 1.2em; letter-spacing: 0.05rem; }
 
