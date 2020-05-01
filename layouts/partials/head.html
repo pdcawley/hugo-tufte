@@ -43,29 +43,6 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" integrity="sha384-L74JDRkaoB7PWnReNepwX6+kSckc13TJXrka4EerY9jxQxSDl0dTguSLcA7dEfq8" crossorigin="anonymous"></script>
   <link rel="preload" as="script" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js">
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.data-tables').each(function() {
-        var $this = $(this);
-        $("thead th", $this).each( function() {
-          var title = $(this).text();
-          $(this).html( '<label for="' + title + '">' + title + '</label><br /><input role="search" name="'+ title +'" type="text" placeholder="Search '+title+'" />');
-        });
-        table = $this.DataTable({
-          "paging": false,
-          "info": true // Default is true, prints "Showing x of y entries"
-        });
-        table.columns().every( function () {
-          var that = this;
-          $('input', this.header()).on( 'keyup change clear', function (ev) {
-            if ( that.search() !== this.value ) {
-              that.search( this.value ).draw();
-            }
-          });
-        });
-      });
-    });
-  </script>
 {{- end }}
 
 {{- if eq hugo.Environment "development" }}
