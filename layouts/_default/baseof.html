@@ -29,11 +29,6 @@
           <a accesskey="{{ $item.Identifier }}" href="{{ $item.URL }}" {{ if eq $.Page.RelPermalink $item.URL }}class="active"{{ end }} title="{{ if $item.Title }}{{ $item.Title }}{{ else }}{{ $item.Name }} page{{ end }}">{{ $item.Name }}</a>
         {{- end }}
       </nav>
-      <script>
-        var form = document.getElementById('search-link');
-        form.setAttribute("href", "/search/");
-        form.setAttribute("title", "Site-wide search");
-      </script>
       <hr>
     </header>
     {{ block "breadcrumb" . }}{{ end }}
