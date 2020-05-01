@@ -109,7 +109,11 @@ article header, body > footer { width: 95%; }
 body > header {
   hr { display: none; }
   &> nav.site-nav {
-    h1 { display: inline-block; margin: 0; font-family: $heading-font }
+    h1 { display: inline-block; margin: 0;
+      a {
+        font-family: $heading-font;
+      }
+    }
     padding: 1rem 0;
     a {
       &.hide-when-javascript-disabled { display: none; }
