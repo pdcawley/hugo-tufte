@@ -27,9 +27,11 @@ h2, h3, h4, summary { font-style: italic; font-weight: 400; margin-bottom: 0; li
 h2, summary { font-size: 2.1rem; margin-top: 1.8667rem; }
 h3 { font-size: 1.8rem; margin-top: 2.1778rem; }
 h4 { font-size: 1.2rem; margin-top: 1.6778rem; }
+h2, h3, h4 { margin-bottom: -1.4rem; }
 
 p, ol, ul, dl { font-size: 1.4rem; }
-p { margin-top: 1.4rem; }
+p { margin-top: 1.4rem; text-indent: 0;}
+p + p { text-indent: 2rem; margin-top: 0; }
 p, li { line-height: 2rem; padding-right: 2rem; vertical-align: baseline; }
 blockquote {
   color: darken($table-header, 25%);
@@ -136,7 +138,21 @@ pre, pre code { font-family: $code-font; padding: 0.8571rem 1.5%; overflow-x: au
 code { font-family: $code-font; color:$code-color; font-size: 1.1rem; }
 pre code { font-size: 1.0rem; line-height: 1.7142; margin-top: 0; margin-bottom: 0; display: block; white-space: pre; }
 
-.newthought { font-variant: small-caps; font-size: 1.2em; letter-spacing: 0.05rem; }
+p + p > .newthought {
+    margin-left: -4rem;
+    margin-top: 1.4rem;
+
+}
+
+.newthought {
+  font-variant: small-caps;
+  font-family: $small-caps;
+  font-size: 1.1em;
+  letter-spacing: 0.05rem;
+  display: inline-block;
+  margin-left: 0;
+  margin-top: 0;
+}
 
 @import "marginalia";
 
