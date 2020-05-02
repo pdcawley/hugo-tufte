@@ -2,36 +2,28 @@
   {{ partial "breadcrumb.html" . }}
 {{ end }}
 {{ define "main" }}
-  <article id="skip-to-content" role="article" aria-labelledby="{{ anchorize .Title }}">
+  <article class="h-entry" id="skip-to-content" role="article" aria-labelledby="{{ anchorize .Title }}">
     <header aria-labelledby="{{ anchorize .Title }}" role="heading" aria-level="1">
       <hgroup>
-        <h1 id="{{ anchorize .Title }}">{{ .Title }}</h1>
-        {{- with .Params.title_sub }}<h2>{{ . }}</h2>{{- end }}
-        {{- with .Params.headline }}<h3>{{ . }}</h3>{{- end }}
+          <h1 class ="p-name" id="{{ anchorize .Title }}">{{ .Title }}</h1>
+          {{- with .Params.title_sub }}<h2>{{ . }}</h2>{{- end }}
+          {{- with .Params.headline }}<h3>{{ . }}</h3>{{- end }}
       </hgroup>
+      <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
+          {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
+      </p>
     </header>
     <section class="content" role="region" aria-label="Content">
-      {{ .Content }}
+        {{ .Content }}
     </section>
-    <footer role="complementary" aria-label="Metadata and Related Posts">
-      <nav aria-labelledby="skip-to-posts-metadata">
-        <h2 id="skip-to-posts-metadata">Metadata</h2>
-        <p aria-label="Publication date and tags">
-        <time aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format .Date }}">{{ dateFormat "2006-01-02" .Date }}</time>
-        {{ if ne .Lastmod .Date }}<ins>: (Updated <time datetime="{{ .Lastmod.Format $.Site.Params.iso8601_format }}">{{ .Lastmod.Format "2006-01-02" }}</time></ins>){{ end }}
-        ::
-        {{- with .Params.tags }}<span id="skip-to-tags">{{ partial "tags.html" . }}</span>{{- end }}
-        </p>
-      <nav aria-labelledby="skip-to-related-posts">
-        <h2 id="skip-to-related-posts">Related Posts</h2>
-        <ul>
-          {{ range first 5 (.Site.RegularPages.Related .) }}
-            <li>
-              <a aria-label="Related post: {{ .Title }}" href="{{ .RelPermalink }}"><cite>{{ .Title | markdownify }}</cite></a>
-            </li>
-          {{ end }}
-        </ul>
-      </nav>
+    <footer role="complement~ary" aria-label="Metadata and Related Posts">
+        <nav>
+            {{- if .Params.tags }}
+            <p aria-label="Tags">
+                {{- with .Params.tags }}<span id="skip-to-tags">{{ partial "tags.html" . }}</span>{{- end }}
+            </p>
+            {{- end }}
+        </nav>
     </footer>
   </article>
 {{ end }}

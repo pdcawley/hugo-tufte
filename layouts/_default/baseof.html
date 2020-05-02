@@ -13,24 +13,24 @@
       {{ partial "head" . }}
     {{ end }}
   </head>
-  <body class="{{ if isset .Params "full_width"}}full-width{{ else }}default-width{{ end }}">
+  <body class="{{ if isset .Params "full_width"}}full-width{{ else }}default-width{{ end }} {{ .Type }}{{ if .IsHome }} home{{ end }}">
       <header aria-label="Site-wide header" role="banner">
           {{ partial "brand.html" . }}
           <nav class="group site-nav" role="navigation" aria-label="Site-wide navigation">
               <a href="#skip-to-content" accesskey="c" title="Skip to Content" class="offscreen">Skip to Content</a>
               <hr>
               {{- range $idx, $item := .Site.Menus.topnav }}
-              <a accesskey="{{ $item.Identifier }}" href="{{ $item.URL }}" {{ if eq $.Page.RelPermalink $item.URL }}class="active"{{ end }} title="{{ if $item.Title }}{{ $item.Title }}{{ else }}{{ $item.Name }} page{{ end }}">{{ $item.Pre }}{{ $item.Name }}</a>
+              <a class="menuitem" accesskey="{{ $item.Identifier }}" href="{{ $item.URL }}" {{ if eq $.Page.RelPermalink $item.URL }}class="active"{{ end }} title="{{ if $item.Title }}{{ $item.Title }}{{ else }}{{ $item.Name }} page{{ end }}">{{ $item.Pre }}{{ $item.Name }}</a>
               {{- end }}
           </nav>
       <hr>
     </header>
     {{ block "breadcrumb" . }}{{ end }}
     <main class="group" role="main" aria-label="Main Content">
-      {{ block "main" . }}{{ end }}
+        {{ block "main" . }}{{ end }}
     </main>
     {{ block "footer" . }}
-      {{ partial "footer.html" . }}
+    {{ partial "footer.html" . }}
     {{ end }}
   </body>
 </html>

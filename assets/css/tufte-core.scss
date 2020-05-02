@@ -143,10 +143,11 @@ body > header {
   }
 
   &> nav.site-nav {
+    display: flex;
     margin: 0.25rem 0 0 0;
-      border-top: solid thin $contrast-color;
-      border-bottom: solid thin $contrast-color;
-      width: 85%;
+    border-top: solid thin $contrast-color;
+    border-bottom: solid thin $contrast-color;
+    width: 85%;
     a {
       &.hide-when-javascript-disabled { display: none; }
       font-style: normal;
@@ -156,9 +157,12 @@ body > header {
       color: $contrast-color;
       text-decoration: none;
       display: inline-block;
-      margin: 0.2rem 2rem 0.2rem auto;
+      margin: 0.2rem 0 0.2rem 0;
       vertical-align: baseline;
       font-variant: small-caps;
+      &:not(:last-of-type) {
+        margin-right: auto;
+      }
     }
   }
 }
@@ -301,12 +305,38 @@ dl {
 
 article footer nav ul { width: 87.5% }
 
+main > article header {
+  .colophon {
+    margin-top: 0;
+    .surname { display: none; }
+  }
+}
+
+article footer {
+  display: flex;
+  width: 55%;
+  margin-top: 0.5rem;
+  .colophon {
+    margin-top: 0;
+    .surname { display: none; }
+  }
+  .read-more {
+    margin-left: auto;
+    padding-right: 0;
+    width: fit-content;
+    font-family: $small-caps;
+    font-weight: 500;
+  }
+}
+
 main {
   > ol {
     width: 100%; padding: 0;
-    li {
-      margin-left: 1.2rem; padding-right: 0;
-      // I'd prefer to use padding-bottom, but because of the float nature of the
+    > li {
+      /* margin-left: 1.2rem; */
+      padding-right: 0;
+      display: block;
+      // I\'d prefer to use padding-bottom, but because of the float nature of the
       // elements this does not work.
       &:not(:first-of-type) { padding-top: 1rem; }
     }
@@ -318,6 +348,27 @@ main {
 article li { padding-bottom: 0.5rem; }
 
 article hgroup h2 { margin-bottom: 1.2rem; }
+
+article > header {
+  h1, h2, h3, h4 {
+    margin-bottom: 0;
+  }
+  > ul {
+    padding-left: 0;
+    > li {
+      padding-right: 0.5rem;
+      padding-bottom: 0;
+      display: inline-block;
+    }
+  }
+}
+
+article section[role="summary"] > p{
+  margin-top: 0.2rem;
+  &:not(:first-of-type) {
+    margin-top: 0;
+  }
+}
 
 // breadcrumb
 .breadcrumbs, .paginator {
@@ -336,6 +387,16 @@ article hgroup h2 { margin-bottom: 1.2rem; }
   a { margin-right: 0.5rem; }
   a:not(:first-of-type) { margin-left: 0.5rem; }
   .fa { padding: 0 0.3em; }
+}
+
+.articles + .paginator, .post footer > .paginator {
+  border-top: thin solid $contrast-color;
+  margin-top: 1.4em;
+}
+
+.post footer > nav.paginator {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
 .hide-js { display: none; }

@@ -17,27 +17,15 @@
 {{ end }}
 {{ define "main" }}
 <h1 id="skip-to-content">Blog Posts</h1>
-<ol aria-labelledby="skip-to-content">
+<section class="articles" aria-labelledby="skip-to-content">
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
     {{ range $index, $object := $paginator.Pages }}
     {{ with $object }}
-    <li>
-        <h2><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
-        <p aria-label="Publication date and tags">
-            {{- with .Date }}<time aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> :: {{- end }}
-            {{- with .Params.tags }}{{ partial "tags.html" . }}{{- end }}
-        </p>
-        {{- if isset .Params "headline" }}
-        {{ partial "paragraphy.html" .Params.headline }} <a href="{{ .RelPermalink }}">Read More…</a>
-        {{- else }}
-        {{- if isset .Params "description" }}
-        {{ partial "paragraphy.html" .Params.description }} <a href="{{ .RelPermalink }}">Read More…</a>
-        {{- end }}
-        {{- end }}
-    </li>
+    {{ .Scratch.Set "index" $index }}
+    {{ partial "article-summary.html" . }}
     {{- end }}
     {{- end }}
-</ol>
+</section>
 <nav aria-hidden="true" class="paginator">
     {{- with $paginator }}
     {{- if .HasNext }}<a href="{{ .Next.URL }}" rel="prev">Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a href="{{ .Prev.URL }}" rel="next">Next posts</a>{{- end }}
