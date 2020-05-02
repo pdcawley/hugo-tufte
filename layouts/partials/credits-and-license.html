@@ -1,4 +1,10 @@
-<span id="skip-to-licenses">&copy;{{ now.Format "2006" }}&nbsp; <a class="h-card" rel="me" href="/about/">{{ .Site.Params.copyrightHolder }}</a></span>
+<ul class="page-footer-menu">
+    {{ range .Site.Menus.footer }}
+    <li><a href="{{.URL}}" rel="me">{{.Pre }}{{ .Name }}</a></li>
+    {{ end }}
+</ul>
+
+<span id="skip-to-licenses">&copy;2003–{{ now.Format "2006" }}&nbsp; <a class="h-card" rel="me" href="/about/">{{ .Site.Params.copyrightHolder }}</a></span>
 {{ $context := . }}
 {{ range .Params.licenses }}
   <div class="license" role="complementary">

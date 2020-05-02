@@ -14,21 +14,15 @@
     {{ end }}
   </head>
   <body class="{{ if isset .Params "full_width"}}full-width{{ else }}default-width{{ end }}">
-    <header aria-label="Site-wide header" role="banner">
-      <nav class="group site-nav" role="navigation" aria-label="Site-wide navigation">
-        <a href="#skip-to-content" accesskey="c" title="Skip to Content" class="offscreen">Skip to Content</a>
-        {{- if eq .Type "post" }}
-          <a href="#skip-to-related-posts" accesskey="r" title="Skip to Page's Related Posts" class="offscreen">Skip to Page's Related Posts</a>
-        {{- end }}
-        {{- with .Params.licenses }}
-          <a href="#skip-to-licenses" accesskey="l" title="Skip to Page's Licenses" class="offscreen">Skip to Page's Licenses</a>
-        {{- end }}
-        <hr>
-        <h1><a accesskey="h" href="{{ .Site.BaseURL }}" {{ if eq (string $.Page.Permalink) (string .Site.BaseURL) }}class="active"{{end}} title="Homepage of {{ .Site.Title }}" aria-label="Homepage of {{ .Site.Title }}">{{ .Site.Title }}</a></h1>
-        {{- range $idx, $item := .Site.Menus.topnav }}
-          <a accesskey="{{ $item.Identifier }}" href="{{ $item.URL }}" {{ if eq $.Page.RelPermalink $item.URL }}class="active"{{ end }} title="{{ if $item.Title }}{{ $item.Title }}{{ else }}{{ $item.Name }} page{{ end }}">{{ $item.Name }}</a>
-        {{- end }}
-      </nav>
+      <header aria-label="Site-wide header" role="banner">
+          {{ partial "brand.html" . }}
+          <nav class="group site-nav" role="navigation" aria-label="Site-wide navigation">
+              <a href="#skip-to-content" accesskey="c" title="Skip to Content" class="offscreen">Skip to Content</a>
+              <hr>
+              {{- range $idx, $item := .Site.Menus.topnav }}
+              <a accesskey="{{ $item.Identifier }}" href="{{ $item.URL }}" {{ if eq $.Page.RelPermalink $item.URL }}class="active"{{ end }} title="{{ if $item.Title }}{{ $item.Title }}{{ else }}{{ $item.Name }} page{{ end }}">{{ $item.Pre }}{{ $item.Name }}</a>
+              {{- end }}
+          </nav>
       <hr>
     </header>
     {{ block "breadcrumb" . }}{{ end }}

@@ -7,7 +7,7 @@
 
 html, body { height: 100%; }
 html { scroll-behavior: smooth; vertical-align: baseline; font-size: 12px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { margin-left: auto; margin-right: auto; padding-left: 12.5%; font-family: $body-font; background-color: $bg-color; color: $text-color; max-width: 1400px; counter-reset: sidenote-counter; }
+body { margin-left: auto; margin-right: auto; padding-left: 12.5%; font-family: $body-font; background-color: $bg-color; color: $text-color; max-width: 1024px; counter-reset: sidenote-counter; }
 body, article hgroup > *, .list-page ul { width: 87.5%; }
 
 @media screen and (min-width: 800px){ html{ font-size: 12px;} }
@@ -62,10 +62,10 @@ div.epigraph > blockquote {
 }
 /* END Epigraphs */
 
+
 /*-- Table styling section - For Tufte-Jekyll, booktabs style is default for Markdown tables  --*/
 @import "table";
 /* -- End of Table Styling section --*/
-
 
 /* Basic Layout stuff --*/
 ul, ol { padding: 1rem 0 0 5%; width: 45%; }
@@ -109,29 +109,77 @@ article header, body > footer { width: 95%; }
 
 
 body > header {
+  max-width: 1024px;
   hr { display: none; }
-  &> nav.site-nav {
-    h1 { display: inline-block; margin: 0;
-      a {
-        font-family: $heading-font;
-      }
+  [role="brand"] {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    grid-template-areas:
+      "img title"
+      "img desc"
+      "img desc";
+    grid-gap: 0 0.5rem;
+
+    h1 {
+      grid-area: title;
+      margin: 0;
+      a { font-family: $heading-font;}
+      font-size: 4rem;
     }
-    padding: 1rem 0;
+    figure {
+      max-width: 100%;
+      height: 100%;
+      grid-area: img;
+      margin: 0;
+    }
+    p.description {
+      font-style: italic;
+      font-weight: lighter;
+      grid-area: desc;
+      width: auto;
+      margin: -0.5rem auto 0 0.5rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  &> nav.site-nav {
+    margin: 0.25rem 0 0 0;
+      border-top: solid thin $contrast-color;
+      border-bottom: solid thin $contrast-color;
+      width: 85%;
     a {
       &.hide-when-javascript-disabled { display: none; }
       font-style: normal;
       font-size: 1.2rem;
-      font-family: $sans-font;
+      font-family: $small-caps;
       letter-spacing: 0.15em;
       color: $contrast-color;
       text-decoration: none;
       display: inline-block;
-      margin: 1.5rem 2rem 0 auto;
+      margin: 0.2rem 2rem 0.2rem auto;
       vertical-align: baseline;
       font-variant: small-caps;
     }
   }
 }
+
+@media screen and (min-width: 800px){
+  body > header > [role="brand"] {
+    grid-template-columns: 20% 1fr;
+  }
+}
+/* @media screen and (min-width: 900px){ */
+/*   body > header > [role="brand"] { */
+/*     grid-template-columns: 120px 1fr; */
+/*   } */
+/* } */
+/* @media screen and (min-width: 1000px){ */
+/*   body > header > [role="brand"] { */
+/*     grid-template-columns: minmax(10%, 250px) 1fr; */
+/*   } */
+/* } */
+
+
 body > footer { padding-top: 2rem; }
 
 pre, pre code { font-family: $code-font; padding: 0.8571rem 1.5%; overflow-x: auto; color:$code-color; }
@@ -154,10 +202,13 @@ p + p > .newthought {
   margin-top: 0;
 }
 
+
+
 @import "marginalia";
 
 /* -- Jekyll specific styling --*/
 //helper classes
+
 
 .contrast { color: $contrast-color;}
 
@@ -172,9 +223,10 @@ nav {
 /* END SKIP-AMP */
 
 
+
 //change font color for credit links in footer
 .credits {
-  text-align: center;
+  text-align: left;
   padding: 1rem 0rem;
   font-family: $sans-font;
   a { color: $contrast-color; }
@@ -184,6 +236,19 @@ nav {
     padding: 0 2rem;
     img { padding-bottom: 0.5rem; }
   }
+}
+
+ul.page-footer-menu {
+    list-style:none;
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display:inline-block;
+        margin-right: 0.5rem;
+        font-size: 55%;
+    }
 }
 
 // End of Nav and Footer styling area
@@ -257,7 +322,9 @@ article hgroup h2 { margin-bottom: 1.2rem; }
 // breadcrumb
 .breadcrumbs, .paginator {
   .label { display: none; }
-  width: 85%; font-family: $sans-font; padding-bottom: 1rem;
+  width: 85%; font-family: $sans-font;
+  padding: 0.3rem 0;
+  border-bottom: thin solid $contrast-color;
 }
 
 .breadcrumbs a {
@@ -268,6 +335,7 @@ article hgroup h2 { margin-bottom: 1.2rem; }
   clear: both;
   a { margin-right: 0.5rem; }
   a:not(:first-of-type) { margin-left: 0.5rem; }
+  .fa { padding: 0 0.3em; }
 }
 
 .hide-js { display: none; }
@@ -282,6 +350,14 @@ article hgroup h2 { margin-bottom: 1.2rem; }
   }
   // Removed as it appears to not be used
   hr.slender { width: 100%; }
+  body > header > [role="brand"] {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "img "
+      "title "
+      "desc";
+  }
+
 }
 
 @media (max-width: 760px) {
