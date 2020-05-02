@@ -1,0 +1,28 @@
+{{ $index := .Scratch.Get "index" }}
+<article class="h-entry">
+    <header>
+        <h2 class="p-name"><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
+        {{- if .Params.tags }}
+        <ul aria-label="Tags" class="tags">
+            {{- range .Params.tags }}
+            <li><a rel="tag" aria-label="Posts tagged with “{{ . }}”" href="{{ "tags" | absURL }}/{{ . | urlize }}">#{{ . | anchorize }}</a></li>
+            {{- end }}
+        </ul>
+        {{ end }}
+    </header>
+    <section class="p-summary" role="summary">
+        {{- if isset .Params "headline" }}
+        {{ partial "paragraphy.html" .Params.headline }}
+        {{- else if isset .Params "description" }}
+        {{ partial "paragraphy.html" .Params.description }}
+        {{- else }}
+        {{ partial "paragraphy.html" .Summary }}
+        {{- end }}
+    </section>
+    <footer>
+        <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
+            {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
+        </p>
+        <p class='read-more'><a class="u-url u-uid" href="{{ .RelPermalink }}">Read more…</a></p>
+    </footer>
+</article>

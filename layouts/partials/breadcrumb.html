@@ -12,7 +12,7 @@
   {{- if eq .p1.Kind "taxonomy" }}
     <a href="{{ .p1.Site.BaseURL }}"><i class="fa fa-home"></i> Home</a> ⟫
     <a href="{{ .p1.Site.BaseURL }}{{ .p1.Data.Plural }}/">{{ .p1.Data.Plural | title }}</a> ⟫
-    <a class="active" href="{{ .p1.Permalink }}">{{ .p1.Title }}</a>
+    <a class="active" href="{{ .p1.Permalink }}">{{ .p1.Title }}</a> 
   {{- else }}
     {{- if .p1.Parent }}
       {{- template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }} ⟫
