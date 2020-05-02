@@ -7,13 +7,14 @@
  {{ (resources.Get "css/tufte.scss" | resources.ToCSS | resources.Minify).Content | safeCSS }}
 </style>
 <style type="text/css" media="print">
-  {{ (resources.Get "css/print.scss" | resources.ToCSS | resources.Minify).Content | safeCSS }}
+ {{ (resources.Get "css/print.scss" | resources.ToCSS | resources.Minify).Content | safeCSS }}
 </style>
 {{- $tufteAmpCssResource := resources.Get "css/tufte-amp.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <meta name="amp-css-name" content="{{ $tufteAmpCssResource.RelPermalink }}">
 {{ range .Site.Home.AlternativeOutputFormats -}}
-  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title | safeHTML }} {{ .Name }} Feed" />
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title | safeHTML }} {{ .Name }} Feed" />
 {{ end -}}
 {{- range .Site.Menus.me_elsewhere }}
 <link rel="me" href="{{ .URL }}" title="{{ .Name }}">
 {{- end }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.1.7/css/fork-awesome.min.css" integrity="sha256-gsmEoJAws/Kd3CjuOQzLie5Q3yshhvmo7YNtBG7aaEY=" crossorigin="anonymous">

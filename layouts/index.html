@@ -1,47 +1,47 @@
 {{ define "head-title" }}
-  {{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
-  {{- if eq 1 $paginator.PageNumber }}
-    <title>{{ .Title }}</title>
-  {{- else }}
-    <title>{{ .Title }} (page {{ $paginator.PageNumber }})</title>
-  {{- end }}
+{{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+{{- if eq 1 $paginator.PageNumber }}
+<title>{{ .Title }}</title>
+{{- else }}
+<title>{{ .Title }} (page {{ $paginator.PageNumber }})</title>
+{{- end }}
 {{ end }}
 {{ define "breadcrumb" }}
-  {{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
-  <nav role="navigation" aria-label="Blog postings pagination" class="paginator">
+{{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+<nav role="navigation" aria-label="Blog postings pagination" class="paginator">
     {{- with $paginator }}
-      {{- if .HasNext }}<a accesskey="p" href="{{ .Next.URL }}" rel="prev">Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a accesskey="n" href="{{ .Prev.URL }}" rel="next">Next posts</a>{{- end }}
-      Page {{ .PageNumber }} of {{ .TotalPages }}
+    {{- if .HasNext }}<a accesskey="p" href="{{ .Next.URL }}" rel="prev"><i class="fa fa-step-backward"></i> Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a accesskey="n" href="{{ .Prev.URL }}" rel="next">Next posts <i class="fa fa-step-forward"></i></a>{{- end }}
+    Page {{ .PageNumber }} of {{ .TotalPages }}
     {{- end }}
-  </nav>
+</nav>
 {{ end }}
 {{ define "main" }}
-  <h1 id="skip-to-content">Blog Posts</h1>
-  <ol aria-labelledby="skip-to-content">
-  {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
-  {{ range $index, $object := $paginator.Pages }}
-  {{ with $object }}
-  <li>
-    <h2><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
-    <p aria-label="Publication date and tags">
-    {{- with .Date }}<time aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> :: {{- end }}
-    {{- with .Params.tags }}{{ partial "tags.html" . }}{{- end }}
-    </p>
-    {{- if isset .Params "headline" }}
-      {{ partial "paragraphy.html" .Params.headline }} <a href="{{ .RelPermalink }}">Read More…</a>
-    {{- else }}
-    {{- if isset .Params "description" }}
-      {{ partial "paragraphy.html" .Params.description }} <a href="{{ .RelPermalink }}">Read More…</a>
+<h1 id="skip-to-content">Blog Posts</h1>
+<ol aria-labelledby="skip-to-content">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+    {{ range $index, $object := $paginator.Pages }}
+    {{ with $object }}
+    <li>
+        <h2><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
+        <p aria-label="Publication date and tags">
+            {{- with .Date }}<time aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> :: {{- end }}
+            {{- with .Params.tags }}{{ partial "tags.html" . }}{{- end }}
+        </p>
+        {{- if isset .Params "headline" }}
+        {{ partial "paragraphy.html" .Params.headline }} <a href="{{ .RelPermalink }}">Read More…</a>
+        {{- else }}
+        {{- if isset .Params "description" }}
+        {{ partial "paragraphy.html" .Params.description }} <a href="{{ .RelPermalink }}">Read More…</a>
+        {{- end }}
+        {{- end }}
+    </li>
     {{- end }}
     {{- end }}
-  </li>
-  {{- end }}
-  {{- end }}
-  </ol>
-  <nav aria-hidden="true" class="paginator">
+</ol>
+<nav aria-hidden="true" class="paginator">
     {{- with $paginator }}
-      {{- if .HasNext }}<a href="{{ .Next.URL }}" rel="prev">Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a href="{{ .Prev.URL }}" rel="next">Next posts</a>{{- end }}
-      Page {{ .PageNumber }} of {{ .TotalPages }}
+    {{- if .HasNext }}<a href="{{ .Next.URL }}" rel="prev">Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a href="{{ .Prev.URL }}" rel="next">Next posts</a>{{- end }}
+    Page {{ .PageNumber }} of {{ .TotalPages }}
     {{- end }}
   </nav>
 {{ end }}
