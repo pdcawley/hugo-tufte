@@ -114,6 +114,7 @@ article header, body > footer { width: 95%; }
 
 
 body > header {
+  grid-area: hd;
   max-width: 1024px;
   hr { display: none; }
   [role="brand"] {
@@ -474,4 +475,26 @@ main .MathJax_Display {
     overflow-x: auto;
     overflow-y: auto;
     font-size: 80%;
+}
+
+/* Grid stuff. */
+
+body {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 3fr) 1fr;
+  grid-template-areas: ". hd hd hd ."
+                       ". nv nv nv ."
+                       ". bd bd sb ."
+                       ". ft ft ft .";
+  > .navbar {
+    grid-area: nv;
+  }
+
+  > main {
+    grid-area: bd;
+  }
+
+  > footer {
+    grid-area: ft;
+  }
 }

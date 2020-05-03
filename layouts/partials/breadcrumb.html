@@ -1,3 +1,4 @@
+<section class="navbar">
 <nav role="navigation" aria-label="Breadcrumbs" class="breadcrumbs">
   <span class="label">Breadcrumbs: </span>
   {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
@@ -8,11 +9,12 @@
     {{- with .PrevInSection }}<a accesskey="p" href="{{ .Permalink }}" title="{{ .Title }}" rel="prev"><i class="fa fa-step-backward"></i> Previous post</a>{{- end }}{{- if and .PrevInSection .NextInSection }}&nbsp;|&nbsp;{{- end }}{{- with .NextInSection }}<a accesskey="n" href="{{ .Permalink }}" title="{{ .Title }}" rel="next">Next post <i class="fa fa-step-forward"></i></a>{{- end }}
 </nav>
 {{- end }}
+</section>
 {{- define "breadcrumbnav" }}
   {{- if eq .p1.Kind "taxonomy" }}
     <a href="{{ .p1.Site.BaseURL }}"><i class="fa fa-home"></i> Home</a> ⟫
     <a href="{{ .p1.Site.BaseURL }}{{ .p1.Data.Plural }}/">{{ .p1.Data.Plural | title }}</a> ⟫
-    <a class="active" href="{{ .p1.Permalink }}">{{ .p1.Title }}</a> 
+    <a class="active" href="{{ .p1.Permalink }}">{{ .p1.Title }}</a>
   {{- else }}
     {{- if .p1.Parent }}
       {{- template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }} ⟫

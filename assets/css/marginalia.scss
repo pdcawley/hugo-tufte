@@ -64,7 +64,8 @@ aside[role="note"], figure[role="note"] { margin-right: 12.5%; width: 27%; }
 
 // On a narrow screen, display as a block in the flow of the text.
 
-@media screen and (max-width: 760px) {
+// @media screen and (max-width: 760px) {
+@media screen {
   [role="note"] {
     display: block;
   }
