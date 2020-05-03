@@ -1,0 +1,27 @@
+/* This file contains all the constants for colors and font styles */
+
+// Enter Hipster Fonts
+
+$body-font: "Alegreya Sans", sans-serif;
+$sans-font: "Alegreya Sans", sans-serif;
+$code-font: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+$counter-font: "Alegreya", serif;
+$heading-font: "Alegreya SC", serif;
+$small-caps: "Alegreya Sans SC", sans-serif;
+
+// $text-color: #111;
+// $bg-color: #fffff8;
+// $contrast-color: #A00000;
+// $code-color: #0B486E;
+// $border-color: #3B3A00;
+// $table-header: #CCB8B8;
+$text-color: #111;
+$bg-color: #fffff8;
+$contrast-color: #8C0303;
+$code-color: #027333;
+$border-color: #A6977B;
+$table-header: #A6977B;
+// $update-color: #8E83A6;
+$update-color: #5B5071;
+
+$link-style: color; // choices are 'color' or 'underline'. Default is color using $contrast-color set above

@@ -1,17 +1,29 @@
-{{ partial "header.html" . }}
-
-<body>
-<div id="layout" class="pure-g">
-<article class="pure-u-1">
-{{ partial "brand.html" . }}
-{{ partial "content.header.html" . }}
-{{ partial "toc.html" . }}
-<section>{{ .Content }}</section>
-<section>
-  {{ partial "disqus.html" . }}
-  {{ partial "footer.html" . }}
-</section>
-</article>
-</div>
-</body>
-</html>
+{{ define "breadcrumb" }}
+  {{ partial "breadcrumb.html" . }}
+{{ end }}
+{{ define "main" }}
+  <article class="h-entry" id="skip-to-content" role="article" aria-labelledby="{{ anchorize .Title }}">
+    <header aria-labelledby="{{ anchorize .Title }}" role="heading" aria-level="1">
+      <hgroup>
+          <h1 class ="p-name" id="{{ anchorize .Title }}">{{ .Title }}</h1>
+          {{- with .Params.title_sub }}<h2>{{ . }}</h2>{{- end }}
+          {{- with .Params.headline }}<h3>{{ . }}</h3>{{- end }}
+      </hgroup>
+      <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
+          {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
+      </p>
+    </header>
+    <section class="content" role="region" aria-label="Content">
+        {{ .Content }}
+    </section>
+    <footer role="complement~ary" aria-label="Metadata and Related Posts">
+        <nav>
+            {{- if .Params.tags }}
+            <p aria-label="Tags">
+                {{- with .Params.tags }}<span id="skip-to-tags">{{ partial "tags.html" . }}</span>{{- end }}
+            </p>
+            {{- end }}
+        </nav>
+    </footer>
+  </article>
+{{ end }}

@@ -1,0 +1,31 @@
+{{ define "breadcrumb" }}
+  {{ partial "breadcrumb.html" . }}
+{{ end }}
+{{ define "main" }}
+<article id="skip-to-content" role="article">
+  {{- $slug := replaceRE "^/licenses/([^/]*)/$" "$1" .RelPermalink }}
+  {{- $title := .Title }}
+  {{ with index $.Site.Data.licenses $slug }}
+  {{ with index . "Description" }}
+    <section>
+      {{ . | safeHTML }}
+    </section>
+  {{ end }}
+  {{ end }}
+  <section>
+  {{ range .Data.Pages.GroupByDate "2006" }}
+    <details open>
+    <summary class="year">{{ .Key }} ({{ len .Pages }})</summary>
+          {{ range .Pages }}
+            <ul>
+              <li>
+                <span class="list-date">{{ .Date.Format "Jan 2" }} &middot;</span>
+                <a href="{{ .RelPermalink }}">{{.Title}}</a>
+              </li>
+            </ul>
+          {{ end }}
+      </details>
+    {{ end }}
+  </section>
+</article>
+{{ end }}

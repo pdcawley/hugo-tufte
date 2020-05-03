@@ -1,17 +1,35 @@
-{{ partial "header.html" . }}
-<body>
-<div id="layout" class="pure-g">
-<article class="pure-u-1">
-{{ partial "brand.html" . }}
-{{ range first 5 .Site.Pages }}
-  {{ partial "content.header.html" . }}
-  <p>{{ .Summary }}</p>
-  {{ if .Truncated }}
-  <p><a href="{{ .RelPermalink  }}">Read On &rarr;</a></p>
-  {{ end  }}
-{{ end  }}
-{{ partial "footer.html" . }}
-</article>
-</div>
-</body>
-</html>
+{{ define "head-title" }}
+{{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+{{- if eq 1 $paginator.PageNumber }}
+<title>{{ .Title }}</title>
+{{- else }}
+<title>{{ .Title }} (page {{ $paginator.PageNumber }})</title>
+{{- end }}
+{{ end }}
+{{ define "breadcrumb" }}
+{{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+<nav role="navigation" aria-label="Blog postings pagination" class="paginator">
+    {{- with $paginator }}
+    {{- if .HasNext }}<a accesskey="p" href="{{ .Next.URL }}" rel="prev"><i class="fa fa-step-backward"></i> Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a accesskey="n" href="{{ .Prev.URL }}" rel="next">Next posts <i class="fa fa-step-forward"></i></a>{{- end }}
+    Page {{ .PageNumber }} of {{ .TotalPages }}
+    {{- end }}
+</nav>
+{{ end }}
+{{ define "main" }}
+<h1 id="skip-to-content">Blog Posts</h1>
+<section class="articles" aria-labelledby="skip-to-content">
+    {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
+    {{ range $index, $object := $paginator.Pages }}
+    {{ with $object }}
+    {{ .Scratch.Set "index" $index }}
+    {{ partial "article-summary.html" . }}
+    {{- end }}
+    {{- end }}
+</section>
+<nav aria-hidden="true" class="paginator">
+    {{- with $paginator }}
+    {{- if .HasNext }}<a href="{{ .Next.URL }}" rel="prev">Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a href="{{ .Prev.URL }}" rel="next">Next posts</a>{{- end }}
+    Page {{ .PageNumber }} of {{ .TotalPages }}
+    {{- end }}
+  </nav>
+{{ end }}

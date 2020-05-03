@@ -1,7 +1,17 @@
-{{ partial "header.html" . }}
-<section id="main">
-  <div>
-   <h1 id="title">{{ .Title }}</h1>
-  </div>
-</section>
-{{ partial "footer.html" . }}
+{{ define "main" }}
+  <article role="article">
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+    <section id="skip-to-content" class="content">
+      <figure role="note">
+        <img src="/images/logo.jpg" alt="A large yellow wooden abstract chicken stares at you amongst a field of game pieces." data-widht="309" data-height="250" />
+        <figcatpion>The Chicken of Discovery has found nothing.</figcatpion>
+      </figure>
+
+      <p>Welp, it looks like we couldn't find what you requested.</p>
+
+      <p>Maybe try a site <a href="/search/">search</a>? Or <a href="/contact-me/">contacting me</a> to see if I can help you find it. <em>I did migrate my site, and while I tried to avoid broken pages, I'm not perfect.</em></p>
+    </section>
+  </article>
+{{ end }}

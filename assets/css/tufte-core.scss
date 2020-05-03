@@ -1,0 +1,472 @@
+* { margin: 0; padding: 0; }
+
+/* clearfix hack after Cederholm (group class name) */
+.group:after { content: ""; display: table; clear: both; }
+
+// First significant deviation from CSS on tufte.css site - variable font size as browser width expands or contracts
+
+html, body { height: 100%; }
+html { scroll-behavior: smooth; vertical-align: baseline; font-size: 12px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { margin-left: auto; margin-right: auto; padding-left: 12.5%; font-family: $body-font; background-color: $bg-color; color: $text-color; max-width: 1024px; counter-reset: sidenote-counter; }
+body, article hgroup > *, .list-page ul { width: 87.5%; }
+
+@media screen and (min-width: 800px){ html{ font-size: 12px;} }
+@media screen and (min-width: 900px){ html{ font-size: 13px;} }
+@media screen and (min-width: 1000px){ html{ font-size: 14px;} }
+@media screen and (min-width: 1100px){ html{ font-size: 15px; } }
+@media screen and (min-width: 1200px){ html{ font-size: 16px; } }
+@media screen and (min-width: 1300px){ html{ font-size: 17px; } }
+
+// sets link style according to values in _settings.scss
+a { color: $contrast-color;  text-decoration: none; }
+
+// --------- Typography stuff -----------//
+// added rational line height and margins ala http://webtypography.net/intro/
+h1 { font-weight: 400; font-size: 2.5rem; margin: 1.568rem 0; line-height: 1.0889; font-family: $heading-font;}
+h2, h3, h4, summary { font-style: italic; font-weight: 400; margin-bottom: 0; line-height: 1.0889; }
+h2, summary { font-size: 2.1rem; margin-top: 1.8667rem; }
+h3 { font-size: 1.8rem; margin-top: 2.1778rem; }
+h4 { font-size: 1.2rem; margin-top: 1.6778rem; }
+h2, h3, h4 { margin-bottom: -1.4rem; }
+
+p, ol, ul, dl { font-size: 1.4rem; }
+p { margin-top: 1.4rem; text-indent: 0;}
+p + p { text-indent: 2rem; margin-top: 0; }
+p, li { line-height: 2rem; padding-right: 2rem; vertical-align: baseline; }
+blockquote {
+  color: darken($table-header, 25%);
+  width: 55%;
+  font-size: 1.1rem;
+  margin-top: 1.4rem;
+  p, ul, ol, h2, h3, h4 { margin-left: 1rem; margin-right: 1rem; }
+  p { width: 100%; }
+  ul, ol { padding-top: 0; }
+  p, ul, ol { font-size: 1.1rem; line-height: 1.7819rem; margin: 1.7819rem 1rem; }
+  li { font-size: 1.1rem; margin-left: 3.5%; }
+  footer {
+    font-size: 1.1rem;
+    margin-top: 1.4rem;
+    width: 90%;
+    text-align: right;
+  }
+}
+
+/* BEGIN Epigraphs */
+div.epigraph > blockquote {
+  font-style: italic;
+  p, ul { font-style: italic; margin: 1rem 0; }
+  > footer {
+    margin-top: 0rem; font-style: normal;
+    > cite { font-style: italic; }
+  }
+}
+/* END Epigraphs */
+
+
+/*-- Table styling section - For Tufte-Jekyll, booktabs style is default for Markdown tables  --*/
+@import "table";
+/* -- End of Table Styling section --*/
+
+/* Basic Layout stuff --*/
+ul, ol { padding: 1rem 0 0 5%; width: 45%; }
+
+/* ------------------------------------------------------------------------ */
+/* Styling for listing pages. */
+/* ------------------------------------------------------------------------ */
+.list-page {
+  ul { list-style-type: none; margin: -0.25em; max-width: 45rem; }
+  li { margin: 0; }
+}
+.list-date { display: inline; font-size: 0.75em; }
+/* ------------------------------------------------------------------------ */
+/* END Styling for listing pages. */
+/* ------------------------------------------------------------------------ */
+
+figure { margin: 1em 0 3em 0; max-width: 55%; }
+img { max-width: 100%; }
+figcaption {
+  float: right;
+  clear: right;
+  margin-right: -50%;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.0rem;
+  line-height: 1.6;
+  vertical-align: baseline;
+  position: relative;
+  max-width: 40%;
+}
+.fullwidth { max-width: 90%; }
+
+
+// Without this setting, when the header would wrap, the letters would overlap
+h2, h3, h4, .p, p, .table-wrapper, pre, dl { width: 55%; }
+article header, body > footer { width: 95%; }
+.full-width {
+  ul, ol { width: 85%; }
+  h2, h3, h4, .p, p, footer, .table-wrapper, pre, dl { width: 90%; }
+}
+
+
+body > header {
+  max-width: 1024px;
+  hr { display: none; }
+  [role="brand"] {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    grid-template-areas:
+      "img title"
+      "img desc"
+      "img desc";
+    grid-gap: 0 0.5rem;
+
+    h1 {
+      grid-area: title;
+      margin: 0;
+      a { font-family: $heading-font;}
+      font-size: 4rem;
+    }
+    figure {
+      max-width: 100%;
+      height: 100%;
+      grid-area: img;
+      margin: 0;
+    }
+    p.description {
+      font-style: italic;
+      font-weight: lighter;
+      grid-area: desc;
+      width: auto;
+      margin: -0.5rem auto 0 0.5rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  &> nav.site-nav {
+    display: flex;
+    margin: 0.25rem 0 0 0;
+    border-top: solid thin $contrast-color;
+    border-bottom: solid thin $contrast-color;
+    width: 85%;
+    a {
+      &.hide-when-javascript-disabled { display: none; }
+      font-style: normal;
+      font-size: 1.2rem;
+      font-family: $small-caps;
+      letter-spacing: 0.15em;
+      color: $contrast-color;
+      text-decoration: none;
+      display: inline-block;
+      margin: 0.2rem 0 0.2rem 0;
+      vertical-align: baseline;
+      font-variant: small-caps;
+      &:not(:last-of-type) {
+        margin-right: auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px){
+  body > header > [role="brand"] {
+    grid-template-columns: 20% 1fr;
+  }
+}
+/* @media screen and (min-width: 900px){ */
+/*   body > header > [role="brand"] { */
+/*     grid-template-columns: 120px 1fr; */
+/*   } */
+/* } */
+/* @media screen and (min-width: 1000px){ */
+/*   body > header > [role="brand"] { */
+/*     grid-template-columns: minmax(10%, 250px) 1fr; */
+/*   } */
+/* } */
+
+
+body > footer { padding-top: 2rem; }
+
+pre, pre code { font-family: $code-font; padding: 0.8571rem 1.5%; overflow-x: auto; color:$code-color; }
+code { font-family: $code-font; color:$code-color; font-size: 1.1rem; }
+pre code { font-size: 1.0rem; line-height: 1.7142; margin-top: 0; margin-bottom: 0; display: block; white-space: pre; }
+
+p + p > .newthought {
+    margin-left: -4rem;
+    margin-top: 1.4rem;
+
+}
+
+.newthought {
+  font-variant: small-caps;
+  font-family: $small-caps;
+  font-size: 1.1em;
+  letter-spacing: 0.05rem;
+  display: inline-block;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+
+
+@import "marginalia";
+
+/* -- Jekyll specific styling --*/
+//helper classes
+
+
+.contrast { color: $contrast-color;}
+
+//Nav and Footer styling area
+
+// For some reason AMP is mis-behaving around this
+/* BEGIN SKIP-AMP */
+nav {
+  a.active:before { content:"\000AB\000a0"; } // escaped unicode for the double-angled pointing quotes and then a space on active menu links
+  a.active:after { content:"\000a0\000BB"; }
+}
+/* END SKIP-AMP */
+
+
+
+//change font color for credit links in footer
+.credits {
+  text-align: left;
+  padding: 1rem 0rem;
+  font-family: $sans-font;
+  a { color: $contrast-color; }
+  .license {
+    margin-top: 1rem;
+    font-size: smaller;
+    padding: 0 2rem;
+    img { padding-bottom: 0.5rem; }
+  }
+}
+
+ul.page-footer-menu {
+    list-style:none;
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display:inline-block;
+        margin-right: 0.5rem;
+        font-size: 55%;
+    }
+}
+
+// End of Nav and Footer styling area
+
+hr.slender {
+    border: 0;
+    width: 55%;
+    height: 1px;
+    margin: 1.4rem 0;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+}
+
+footer hr.slender {
+  width: 100%
+}
+// End of front listing page stuff
+
+
+// Printing ands screen media queries
+
+// Does not display a print-footer for screen display
+@media screen{ .print-footer { display: none; } }
+
+// BEGIN Skip Navigation
+a.offscreen {
+  position:absolute; left:-1000px; top:-1000px; width:1px; height:1px; text-align: left; overflow:hidden;
+  &:focus, &:active, &:hover {
+    position:absolute;
+    padding: 0.75rem 0.75rem;
+    margin: 1.5rem 2rem 0 0;
+    left:5px;
+    top:-20px;
+    width:auto;
+    height:auto;
+    overflow:visible;
+    background-color:$contrast-color;
+    color: $bg-color; border: 1px dotted #000; }
+}
+// END Skip Navigation
+
+// Working with lists, especially navigation
+
+dl {
+  dt { padding: 2rem 0 0.5rem 1.5rem; text-indent: -1.5rem; }
+  dd { padding: 0.5rem 0 0.5rem 3.5rem; text-indent: -2rem; }
+}
+
+article footer nav ul { width: 87.5% }
+
+main > article header {
+  .colophon {
+    margin-top: 0;
+    .surname { display: none; }
+  }
+}
+
+article footer {
+  display: flex;
+  width: 55%;
+  margin-top: 0.5rem;
+  .colophon {
+    margin-top: 0;
+    .surname { display: none; }
+  }
+  .read-more {
+    margin-left: auto;
+    padding-right: 0;
+    width: fit-content;
+    font-family: $small-caps;
+    font-weight: 500;
+  }
+}
+
+main {
+  > ol {
+    width: 100%; padding: 0;
+    > li {
+      /* margin-left: 1.2rem; */
+      padding-right: 0;
+      display: block;
+      // I\'d prefer to use padding-bottom, but because of the float nature of the
+      // elements this does not work.
+      &:not(:first-of-type) { padding-top: 1rem; }
+    }
+    &+nav { padding-top: 3rem; } // The last nav element on the listing page
+  }
+}
+
+// metadata of articles, either on the index or in the aside
+article li { padding-bottom: 0.5rem; }
+
+article hgroup h2 { margin-bottom: 1.2rem; }
+
+article > header {
+  h1, h2, h3, h4 {
+    margin-bottom: 0;
+  }
+  > ul {
+    padding-left: 0;
+    > li {
+      padding-right: 0.5rem;
+      padding-bottom: 0;
+      display: inline-block;
+    }
+  }
+}
+
+article section[role="summary"] > p{
+  margin-top: 0.2rem;
+  &:not(:first-of-type) {
+    margin-top: 0;
+  }
+}
+
+// breadcrumb
+.breadcrumbs, .paginator {
+  .label { display: none; }
+  width: 85%; font-family: $sans-font;
+  padding: 0.3rem 0;
+  border-bottom: thin solid $contrast-color;
+}
+
+.breadcrumbs a {
+  margin-right: 0.33333333rem;
+  &:not(:first-of-type) { margin-left: 0.3333333rem; }
+}
+.paginator {
+  clear: both;
+  a { margin-right: 0.5rem; }
+  a:not(:first-of-type) { margin-left: 0.5rem; }
+  .fa { padding: 0 0.3em; }
+}
+
+.articles + .paginator, .post footer > .paginator {
+  border-top: thin solid $contrast-color;
+  margin-top: 1.4em;
+}
+
+.post footer > nav.paginator {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.hide-js { display: none; }
+
+@media screen and (max-width: 760px) {
+  h2, h3, h4, .p, p, body > footer, .table-wrapper, pre, dl, ol, ul { width: 90%; }
+  figure { max-width: 90%; }
+  figcaption { margin-right: 0%; max-width: none; }
+  blockquote {
+    width: 80%;
+    > * {  width: 80%; }
+  }
+  // Removed as it appears to not be used
+  hr.slender { width: 100%; }
+  body > header > [role="brand"] {
+    grid-template-columns: 100%;
+    grid-template-areas:
+      "img "
+      "title "
+      "desc";
+  }
+
+}
+
+@media (max-width: 760px) {
+  pre, pre code { width: 90%; padding: 0; }
+}
+/*--- End of Basic Layout stuff from tufte.css ---*/
+
+sup { font-size: 0.7rem; }
+ins { text-decoration-line: none; }
+q:after, q:before { content: none; }
+
+/* Hacks to better present */
+.ogc {
+  border-left: $code-color 1px dotted; padding-left: 1rem;
+  & pre { margin-top: 1rem; }
+}
+
+.update {
+  color: $update-color;
+}
+
+mark {
+  background-color: lighten($update-color, 40%);
+}
+
+del {
+  text-decoration-color: $contrast-color;
+}
+
+/* ------------------------------------------------------------------------ */
+/*  MathJax styling
+/* ------------------------------------------------------------------------ */
+main .MathJax {
+    font: inherit;
+    color: inherit;
+    background: inherit;
+    border: inherit;
+    font-size: 80%;
+}
+
+main .MathJax_Display {
+    font: inherit;
+    color: inherit;
+    background: inherit;
+    border: inherit;
+    padding-bottom: 1rem;
+    /* max-width: 45rem; */
+    overflow-x: auto;
+    overflow-y: auto;
+    font-size: 80%;
+}

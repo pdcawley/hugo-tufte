@@ -1,36 +1,29 @@
-{{ partial "header.html" . }}
-
-<body>
-<div id="layout" class="pure-g">
-<article class="pure-u-1">
-{{ partial "brand.html" . }}
-  {{ partial "content.header.html" . }}
-  <section class="list-page">
-  {{ range .Data.Pages.GroupByDate "2006" }}
-    <details open>
-      <summary class="year">{{ .Key }} ({{ len .Pages }})</summary>
-      {{ range .Pages.GroupByDate "January" }}
-        <ul>
-          <li>
-            <details open>
-              <summary>{{ .Key }} ({{ len .Pages }})</summary>
-                {{ range .Pages }}
-                  <ul>
-                    <li>
-                      <span class="list-date">{{ .Date.Format "Jan 2" }} &middot;</span>
-                      <a href="{{ .RelPermalink }}">{{.Title}}</a>
-                    </li>
-                  </ul>
-                {{ end }}
-            </details>
-          </li>
-        </ul>
-      {{ end }}
-    </details>
-    {{ end }}
-  </section>
-{{ partial "footer.html" . }}
-</article>
-</div>
-</body>
-</html>
+{{ define "breadcrumb" }}
+  {{ partial "breadcrumb.html" . }}
+{{ end }}
+{{ define "main" }}
+  <article id="skip-to-content" role="article">
+    <header>
+      <h1 id="{{ anchorize .Title }}">{{ .Title | title }}</h1>
+    </header>
+    <section class="content">
+      <div class="table-wrapper">
+        <a name="table-{{ .Data.Singular | anchorize }}-{{ .Title | anchorize }}"></a>
+        <table class="stripe data-tables">
+          <caption>Table "{{ .Title | title }}" {{ .Data.Singular | title }}: Posts with "{{ .Title | title }}" {{ .Data.Singular }}</caption>
+          <thead>
+            <tr><th>Title</th><th>Date</th></tr>
+          </thead>
+          <tbody>
+            {{- range .Data.Pages }}
+            <tr>
+              <td><a href="{{ .Permalink}}">{{ .Title }}</a></td>
+              <td><time datetime="{{ dateFormat .Site.Params.iso8601_format .Date }}">{{ dateFormat "2006-01-02" .Date}}</td>
+            </tr>
+            {{- end }}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </article>
+{{ end }}
