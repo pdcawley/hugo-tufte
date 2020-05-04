@@ -46,7 +46,6 @@ p + p { text-indent: 2rem; margin-top: 0; }
 p, li { line-height: 2rem; padding-right: 2rem; vertical-align: baseline; }
 blockquote {
   color: darken($table-header, 25%);
-  width: 55%;
   font-size: 1.1rem;
   margin-top: 1.4rem;
   p, ul, ol, h2, h3, h4 { margin-left: 1rem; margin-right: 1rem; }
@@ -93,11 +92,11 @@ ul, ol { padding: 1rem 0 0 5%; width: 45%; }
 /* END Styling for listing pages. */
 /* ------------------------------------------------------------------------ */
 
-figure { margin: 1em 0 3em 0; max-width: 55%; }
+figure { margin: 1em 0 3em 0; max-width: 100%; }
 img { max-width: 100%; }
 figcaption {
-  float: right;
-  clear: right;
+  // float: right;
+  // clear: right;
   margin-right: -50%;
   margin-top: 0;
   margin-bottom: 0;
@@ -111,7 +110,7 @@ figcaption {
 
 
 // Without this setting, when the header would wrap, the letters would overlap
-h2, h3, h4, .p, p, .table-wrapper, pre, dl { width: 55%; }
+// h2, h3, h4, .p, p, .table-wrapper, pre, dl { width: 55%; }
 article header, body > footer { width: 95%; }
 .full-width {
   ul, ol { width: 85%; }
@@ -270,7 +269,6 @@ ul.page-footer-menu {
 
 hr.slender {
     border: 0;
-    width: 55%;
     height: 1px;
     margin: 1.4rem 0;
     background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
@@ -323,7 +321,6 @@ main > article header {
 
 article footer {
   display: flex;
-  width: 55%;
   margin-top: 0.5rem;
   .colophon {
     margin-top: 0;
