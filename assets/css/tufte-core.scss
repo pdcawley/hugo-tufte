@@ -7,8 +7,14 @@
 
 html, body { height: 100%; }
 html { scroll-behavior: smooth; vertical-align: baseline; font-size: 12px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { margin-left: auto; margin-right: auto; padding-left: 12.5%; font-family: $body-font; background-color: $bg-color; color: $text-color; max-width: 1024px; counter-reset: sidenote-counter; }
-body, article hgroup > *, .list-page ul { width: 87.5%; }
+body {
+  margin-left: auto;
+  margin-right: auto;
+  font-family: $body-font;
+  background-color: $bg-color; color: $text-color;
+  counter-reset: sidenote-counter;
+}
+// body, article hgroup > *, .list-page ul { width: 87.5%; }
 
 .post article hgroup h1 > a {
   pointer-events: none;
@@ -153,7 +159,6 @@ body > header {
     margin: 0.25rem 0 0 0;
     border-top: solid thin $contrast-color;
     border-bottom: solid thin $contrast-color;
-    width: 85%;
     a {
       &.hide-when-javascript-disabled { display: none; }
       font-style: normal;
@@ -309,8 +314,6 @@ dl {
   dd { padding: 0.5rem 0 0.5rem 3.5rem; text-indent: -2rem; }
 }
 
-article footer nav ul { width: 87.5% }
-
 main > article header {
   .colophon {
     margin-top: 0;
@@ -379,7 +382,7 @@ article section[role="summary"] > p{
 // breadcrumb
 .breadcrumbs, .paginator {
   .label { display: none; }
-  width: 85%; font-family: $sans-font;
+  font-family: $sans-font;
   padding: 0.3rem 0;
   border-bottom: thin solid $contrast-color;
 }
@@ -481,11 +484,12 @@ main .MathJax_Display {
 
 body {
   display: grid;
-  grid-template-columns: 1fr repeat(3, 3fr) 1fr;
-  grid-template-areas: ". hd hd hd ."
-                       ". nv nv nv ."
-                       ". bd bd sb ."
-                       ". ft ft ft .";
+  margin: 1rem calc(50vw - min(35vw, 600px));
+  grid-template-columns: minmax(400px,2fr);
+  grid-template-areas: "hd hd hd"
+                       "nv nv nv"
+                       "bd bd sb"
+                       "ft ft ft";
   > .navbar {
     grid-area: nv;
   }
