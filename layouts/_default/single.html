@@ -5,18 +5,18 @@
   <article class="h-entry" id="skip-to-content" role="article" aria-labelledby="{{ anchorize .Title }}">
     <header aria-labelledby="{{ anchorize .Title }}" role="heading" aria-level="1">
       <hgroup>
-          <h1 class ="p-name" id="{{ anchorize .Title }}">{{ .Title }}</h1>
+          <h1 class ="p-name" id="{{ anchorize .Title }}"><a class="u-url" href="{{ .Permalink }}">{{ .Title }}</a></h1>
           {{- with .Params.title_sub }}<h2>{{ . }}</h2>{{- end }}
           {{- with .Params.headline }}<h3>{{ . }}</h3>{{- end }}
       </hgroup>
-      <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
+      <p class="colophon">Written by <a class="p-author h-card" href="/">{{ .Site.Params.author | safeHTML }}</a> on
           {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
     </header>
-    <section class="content" role="region" aria-label="Content">
+    <section class="content e-content" role="region" aria-label="Content">
         {{ .Content }}
     </section>
-    <footer role="complement~ary" aria-label="Metadata and Related Posts">
+    <footer role="complementary" aria-label="Metadata and Related Posts">
         <nav>
             {{- if .Params.tags }}
             <p aria-label="Tags">
