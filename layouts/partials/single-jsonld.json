@@ -15,7 +15,7 @@
     {{ end }}
       {
         "@type": "imageObject",
-        {{- $original := resources.Get "images/large-takeonrules-banner.jpg" }}
+        {{- $original := resources.Get "images/whoami/avatar.jpg" }}
         "url": "{{ $original.Permalink }}",
         "width": {{ $original.Width }},
         "height": {{ $original.Height }}

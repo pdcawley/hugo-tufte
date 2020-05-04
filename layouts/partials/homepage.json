@@ -11,7 +11,7 @@
   "accessibilityFeature": ["structuralNavigation", "highContrastDisplay", "readingOrder", "displayTransformability/resizeText", "structuralNavigation", "unlocked", "fullKeyboardControl", "fullMouseControl"],
   "accessibilityHazard": ["noFlashingHazard", "noMotionSimulationHazard", "noSoundHazard" ],
   "accessibilityAPI": "ARIA",
-  "inLanguage": "en-US",
+  "inLanguage": "en-GB",
   "hasPart": [{
     "@type": "Blog",
     "blogPost": [
@@ -36,7 +36,7 @@
             {{ end }}
               {
                 "@type": "imageObject",
-                {{- $original := resources.Get "images/large-takeonrules-banner.jpg" }}
+                {{- $original := resources.Get "images/theme/header.jpg" }}
                 "url": "{{ $original.Permalink }}",
                 "width": {{ $original.Width }},
                 "height": {{ $original.Height }}
@@ -65,30 +65,6 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "{{ .Site.BaseURL }}about/"
-    }
-  },{
-    "@type": "CollectionPage",
-    "url": "{{ .Site.BaseURL }}metadata/",
-    "abstract": "A web page outlining the different views into the content of the site.",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ .Site.BaseURL }}metadata/"
-    }
-  },{
-    "@type": "CollectionPage",
-    "url": "{{ .Site.BaseURL }}blog-roll/",
-    "abstract": "A web page listing blogs I follow.",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ .Site.BaseURL }}blog-roll/"
-    }
-  },{
-    "@type": "ContactPage",
-    "url": "{{ .Site.BaseURL }}contact-me/",
-    "abstract": "A web page providing means of contacting the author and publisher of the {{ .Site.Title }}.",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "{{ .Site.BaseURL }}contact-me/"
     }
   }]
 }
