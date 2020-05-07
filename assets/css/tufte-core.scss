@@ -18,6 +18,10 @@ body {
   color: currentcolor;
 }
 
+iframe {
+    margin-top: 1rem !important; // Some embed code is shite!
+}
+
 @media screen and (min-width: 800px){ html{ font-size: 12px;} }
 @media screen and (min-width: 900px){ html{ font-size: 13px;} }
 @media screen and (min-width: 1000px){ html{ font-size: 14px;} }
@@ -75,7 +79,7 @@ div.epigraph > blockquote {
 /* -- End of Table Styling section --*/
 
 /* Basic Layout stuff --*/
-ul, ol { padding: 1rem 0 0 5%; width: 45%; }
+ul, ol { padding: 1rem 0 0 5%; width: 95%; }
 
 /* ------------------------------------------------------------------------ */
 /* Styling for listing pages. */
@@ -101,7 +105,7 @@ figcaption {
   line-height: 1.6;
   vertical-align: baseline;
   position: relative;
-  max-width: 40%;
+  max-width: 90%;
 }
 .fullwidth { max-width: 90%; }
 
@@ -110,8 +114,8 @@ figcaption {
 // h2, h3, h4, .p, p, .table-wrapper, pre, dl { width: 55%; }
 article header, body > footer { width: 95%; }
 .full-width {
-  ul, ol { width: 85%; }
-  h2, h3, h4, .p, p, footer, .table-wrapper, pre, dl { width: 90%; }
+  ul, ol { width: 95%; }
+  h2, h3, h4, .p, p, footer, .table-wrapper, pre, dl { width: 100%; }
 }
 
 
