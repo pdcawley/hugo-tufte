@@ -1,8 +1,5 @@
 * { margin: 0; padding: 0; }
 
-/* clearfix hack after Cederholm (group class name) */
-.group:after { content: ""; display: table; clear: both; }
-
 // First significant deviation from CSS on tufte.css site - variable font size as browser width expands or contracts
 
 html, body { height: 100%; }
@@ -482,7 +479,8 @@ main .MathJax_Display {
 body {
   display: grid;
   margin: 1rem calc(50vw - min(35vw, 600px));
-  grid-template-columns: minmax(400px,2fr);
+  max-width: 1200px;
+  grid-template-columns: repeat(3,2fr);
   grid-template-areas: "hd hd hd"
                        "nv nv nv"
                        "bd bd sb"
@@ -495,7 +493,22 @@ body {
     grid-area: bd;
   }
 
+  main::after {
+      content: "";
+      grid-area: sb
+  }
+
   > footer {
     grid-area: ft;
   }
 }
+
+body.home {
+    grid-template-areas: "hd hd hd"
+                         "nv nv nv"
+                         "bd bd bd"
+                         "ft ft ft"
+
+}
+
+

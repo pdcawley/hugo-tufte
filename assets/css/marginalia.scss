@@ -59,16 +59,15 @@ aside[role="note"], figure[role="note"] { margin-right: 12.5%; width: 27%; }
 
 // On a narrow screen, display as a block in the flow of the text.
 
-// @media screen and (max-width: 760px) {
 @media screen {
   [role="note"] {
     display: block;
   }
   object[role="note"], aside[role="note"], ins[role="note"] {
-    margin-top: 0.2rem;
-    border-left: $contrast-color thin dotted;
-    padding-left: 0.5rem;
-    margin: 1rem 2.5%;
+    margin-top: -1.45em;
+    margin-left: calc( 2 * min(1200px, 70vw) / 3 + 1rem);
+    width: calc(min(1200px, 70vw) / 3 - 1rem);
+    position: absolute;
   }
   object[role="note"], aside[role="note"], figure[role="note"], ins[role="note"] {
     br {
@@ -76,4 +75,28 @@ aside[role="note"], figure[role="note"] { margin-right: 12.5%; width: 27%; }
      &:last-of-type { margin-bottom: 0rem; }
    }
   }
+}
+
+body.home {
+    object[role="note"], aside[role="note"], ins[role="note"] {
+        margin-top: 0.2rem;
+        border-left: $contrast-color thin dotted;
+        padding-left: 0.5rem;
+        margin: 1rem 2.5%;
+        position: unset;
+        width: auto;
+    }
+}
+
+
+// @media screen and (max-width: 900px) {
+@media (max-width: 900px) {
+    object[role="note"], aside[role="note"], ins[role="note"] {
+        margin-top: 0.2rem;
+        border-left: $contrast-color thin dotted;
+        padding-left: 0.5rem;
+        margin: 1rem 2.5%;
+        position: unset;
+        width: auto;
+    }
 }

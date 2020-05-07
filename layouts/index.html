@@ -8,12 +8,13 @@
 {{ end }}
 {{ define "breadcrumb" }}
 {{- $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
-<nav role="navigation" aria-label="Blog postings pagination" class="paginator">
+<div class="navbar"><nav role="navigation" aria-label="Blog postings pagination" class="paginator">
     {{- with $paginator }}
     {{- if .HasNext }}<a accesskey="p" href="{{ .Next.URL }}" rel="prev"><i class="fa fa-step-backward"></i> Previous posts</a>{{- end }}{{- if and .HasNext .HasPrev}}&nbsp;|&nbsp;{{- end }}{{- if .HasPrev }}<a accesskey="n" href="{{ .Prev.URL }}" rel="next">Next posts <i class="fa fa-step-forward"></i></a>{{- end }}
     Page {{ .PageNumber }} of {{ .TotalPages }}
     {{- end }}
 </nav>
+</div>
 {{ end }}
 {{ define "main" }}
 <h1 id="skip-to-content">Blog Posts</h1>
