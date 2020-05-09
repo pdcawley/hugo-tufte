@@ -1,9 +1,2 @@
-{{/*
-  Inject a paragraph into a markdown rendering if a paragraph does not already wrap the content.
-*/}}
-{{ $content := . | markdownify }}
-{{- if findRE "^<p>" $content }}
-{{ $content | safeHTML }}
-{{- else }}
-<p>{{ $content | safeHTML }}</p>
-{{- end }}
+{{ $md := . | markdownify }}
+{{- if findRE "^ *<p>" $md }}{{ $md | safeHTML }}{{- else }}<p>{{- $md }}</p>{{- end }}
