@@ -8,6 +8,9 @@
 <style type="text/css" media="print">
  {{ (resources.Get "css/print.scss" | resources.ToCSS | resources.Minify).Content | safeCSS }}
 </style>
+<style type="text/css" media="screen,print">
+  {{ (resources.Get "css/overrides.scss" | resources.ToCSS | resources.Minify).Content | safeCSS }}
+</style>
 {{- $tufteAmpCssResource := resources.Get "css/tufte-amp.scss" | resources.ToCSS | resources.Minify | resources.Fingerprint }}
 <meta name="amp-css-name" content="{{ $tufteAmpCssResource.RelPermalink }}">
 {{ range .Site.Home.AlternativeOutputFormats -}}
