@@ -1,10 +1,10 @@
-<ul class="page-footer-menu">
+ <ul class="page-footer-menu">
     {{ range .Site.Menus.footer }}
     <li><a href="{{.URL}}" rel="me">{{.Pre }}{{ .Name }}</a></li>
     {{ end }}
 </ul>
 
-<span id="skip-to-licenses">&copy;2003–{{ now.Format "2006" }}&nbsp; <a class="h-card" rel="me" href="/about/">{{ .Site.Params.copyrightHolder }}</a></span>
+ <span id="skip-to-licenses">&copy;2003–{{ now.Format "2006" }}&nbsp; <a rel="me" href="/pages/about/">{{ .Site.Params.copyrightHolder }}</a>. See the <a href="/pages/colophon/">colophon</a> for how I built this.</span>
 {{ $context := . }}
 {{ range .Params.licenses }}
   <div class="license" role="complementary">
