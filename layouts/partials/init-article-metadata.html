@@ -1,0 +1,29 @@
+{{- $slug := .RelPermalink | sha256 }}
+{{  $all_mentions := index $.Site.Data.mentions $slug | default slice }}
+{{ $likes := slice }}
+{{ $reposts := slice }}
+{{ $replies := slice }}
+{{ $mentions := slice }}
+{{ $rest := slice }}
+
+{{ range $all_mentions }}
+{{ $type := (index . "wm-property") }}
+{{ if (eq $type "like-of") }}
+{{ $likes = $likes | append . }}
+{{ else if (eq $type "repost-of") }}
+{{ $reposts = $reposts | append . }}
+{{ else if (eq $type "in-reply-to") }}
+{{ $replies = $replies | append . }}
+{{ else if (eq $type "mention-of") }}
+{{ $mentions = $mentions | append . }}
+{{ else }}
+{{ $rest = $rest | append . }}
+{{ end }}
+{{ end }}
+
+{{ .Scratch.SetInMap "mentions" "all" $all_mentions }}
+{{ .Scratch.SetInMap "mentions" "likes" $likes }}
+{{ .Scratch.SetInMap "mentions" "reposts" $reposts }}
+{{ .Scratch.SetInMap "mentions" "replies" $replies }}
+{{ .Scratch.SetInMap "mentions" "mentions" $mentions }}
+{{ .Scratch.SetInMap "mentions" "others" $rest -}}
