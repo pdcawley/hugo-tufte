@@ -36,8 +36,16 @@
       <p class="colophon">Written by <a class="p-author h-card" href="/">{{ .Site.Params.author | safeHTML }}</a> on
           {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
+      
     </header>
     <section class="content e-content" role="region" aria-label="Content">
+      <header class="p-summary" style="display:none;">
+	{{- if isset .Params "description" }}
+	{{ partial "paragraphy.html" .Params.description }}
+	{{ else }}
+	{{ partial "paragraphy.html" .Summary }}
+	{{ end -}}
+      </header>
       {{ .Content }}
       <footer class="metaline">	
 	<ul class="response-summary">
