@@ -1,2 +1,2 @@
 {{ $md := . | markdownify }}
-{{- if findRE "^ *<p>" $md }}{{ $md | safeHTML }}{{- else }}<p>{{- $md }}</p>{{- end }}
+{{- if findRE "^ *<p>" $md }}{{ $md | safeHTML }}{{- else }}<p>{{- $md | safeHTML }}</p>{{- end }}
