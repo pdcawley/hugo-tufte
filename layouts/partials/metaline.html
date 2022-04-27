@@ -1,0 +1,10 @@
+<footer class="metaline">
+  {{- with .Scratch.Get "mentions" }}
+  <ul class="response-summary">
+    <li>{{ .likes | len }} likes</li>
+    <li>{{ .reposts | len }} reposts</li>
+    <li>{{ .replies | len }} replies</li>
+  </ul>
+  {{ end -}}
+</footer>
+      
