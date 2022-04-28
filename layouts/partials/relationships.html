@@ -2,7 +2,7 @@
 <section class="relationships">
   {{- with $.Params.tweet }}
   <pre class="p-bridgy-twitter-content">{{ . }}</pre>
-  <a class="bridgy" href="https://brid.gy/publish/twitter"></a>
+  <a class="bridgy" href="https://brid.gy/publish/twitter{{ with $.Params.omit_link }}?bridgy_omit_link={{ . }}{{ end }}"></a>
   {{ else }}
   <a href="https://brid.gy/publish/twitter?bridgy_omit_link=maybe"></a>
   {{ end -}}

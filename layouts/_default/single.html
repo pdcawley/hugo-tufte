@@ -15,13 +15,7 @@
           {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
     </header>
-    <section class="p-summary" style="display:none;">
-      {{- if isset .Params "description" }}
-      {{ partial "paragraphy.html" .Params.description }}
-      {{ else }}
-      {{ partial "paragraphy.html" .Summary }}
-      {{ end -}}
-    </section>
+    {{ partial "summary-section.html" . }}
     <section class="content e-content" role="region" aria-label="Content">
       {{ .Content }}
       {{ partial "metaline.html" . }}
