@@ -1,9 +1,10 @@
 <footer class="metaline">
   {{- with .Scratch.Get "mentions" }}
   <ul class="response-summary">
-    <li>{{ .likes | len }} likes</li>
-    <li>{{ .reposts | len }} reposts</li>
-    <li>{{ .replies | len }} replies</li>
+    <li>{{ .likes | len }} {{ if eq 1 (len .likes) }}like{{ else }}likes{{ end }}</li>
+    <li>{{ .reposts | len }} {{ if eq 1 (len .reposts) }}like{{ else }}reposts{{ end }}</li>
+    <li>{{ .replies | len }} {{ if eq 1 (len .replies) }}reply{{ else }}replies{{ end }}</li>
+    <li>{{ .mentions | len }} {{ if eq 1 (len .mentions) }}mention{{ else }}mentions{{ end }}</li>
   </ul>
   {{ end -}}
 </footer>
