@@ -25,11 +25,12 @@
       {{ end }}
       {{- end -}}
     </section>
+    {{ partial "relationships.html" . }}
     {{ partial "metaline.html" . }}
     <footer>
-        <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
-            {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
-        </p>
-        <p class='read-more'><a class="u-url u-uid" href="{{ .RelPermalink }}">Read more…</a></p>
+      <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
+        {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
+      </p>
+      <p class='read-more'><a class="u-url u-uid" href="{{ .RelPermalink }}">Read more…</a></p>
     </footer>
 </article>

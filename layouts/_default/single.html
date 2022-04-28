@@ -26,7 +26,7 @@
       {{ .Content }}
       {{ partial "metaline.html" . }}
     </section>
-      
+    {{ partial "relationships.html" . }}
     <section class="content" id="webmentions">
       {{ $mentions := .Scratch.Get "mentions" }}
       {{- if lt 0 (len $mentions.likes) }}
