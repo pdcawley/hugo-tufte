@@ -1,4 +1,5 @@
 {{ $index := .Scratch.Get "index" }}
+{{ $blockOpt := dict "display" "block" }}
 {{ partial "init-article-metadata.html" . }}
 <article class="h-entry">
     <header>
@@ -12,13 +13,17 @@
         {{ end }}
     </header>
     <section class="p-summary" role="summary">
-        {{- if isset .Params "headline" }}
-        {{ partial "paragraphy.html" .Params.headline }}
-        {{- else if isset .Params "description" }}
-        {{ partial "paragraphy.html" .Params.description }}
-        {{- else }}
-        {{ partial "paragraphy.html" .Summary }}
-        {{- end }}
+      {{- if isset .Params "headline" }}
+      {{ .Params.headline | .Page.RenderString $blockOpt }}
+      {{- else if isset .Params "description" }}
+      {{ .Params.description | .Page.RenderString $blockOpt }}
+      {{- else }}
+      {{ if findRE "^ *<p>" .Summary }}
+      {{ .Summary }}
+      {{ else }}
+      {{ .Summary | .Page.RenderString $blockOpt | safeHTML }}
+      {{ end }}
+      {{- end -}}
     </section>
     {{ partial "metaline.html" . }}
     <footer>
