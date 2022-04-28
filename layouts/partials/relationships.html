@@ -6,6 +6,17 @@
   {{ else }}
   <a href="https://brid.gy/publish/twitter?bridgy_omit_link=maybe"></a>
   {{ end -}}
+  {{- with $.Params.syndicated_at }}
+  <ul class="syndications">
+    {{- range $network, $permalink := . }}
+    <li>
+      <a rel="syndication" class="u-syndication" href="{{ $permalink }}">
+	<i class="fa fa-{{ $network }}"></i>
+      </a>
+    </li>
+    {{ end -}}
+  </ul>
+  {{ end -}}
   {{- with $.Params.mentions }}
   <ul class="our-mentions">
     {{- range . }}
