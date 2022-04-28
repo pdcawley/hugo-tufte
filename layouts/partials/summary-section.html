@@ -1,0 +1,14 @@
+{{ $blockOpt := dict "display" "block" }}
+<section class="p-summary" role="summary">
+  {{- if isset .Params "headline" }}
+  {{ .Params.headline | .Page.RenderString $blockOpt }}
+  {{- else if isset .Params "description" }}
+  {{ .Params.description | .Page.RenderString $blockOpt }}
+  {{- else }}
+  {{ if findRE "^ *<p>" .Summary }}
+  {{ .Summary }}
+  {{ else }}
+  {{ .Summary | .Page.RenderString $blockOpt | safeHTML }}
+  {{ end }}
+  {{- end -}}
+</section>
