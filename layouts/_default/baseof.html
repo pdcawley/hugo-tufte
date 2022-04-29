@@ -13,7 +13,7 @@
       {{ partial "head" . }}
     {{ end }}
   </head>
-  <body class="{{ if isset .Params "full_width"}}full-width{{ else }}default-width{{ end }} {{ .Type }}{{ if .IsHome }} home{{ end }}">
+  <body class="{{ if isset .Params "full_width"}}full-width{{ else }}default-width{{ end }} {{ .Type }}{{ if .IsHome }} home{{ end }}{{ with .Pages }} h-feed{{ end }}">
       <header aria-label="Site-wide header" role="banner">
           {{ partial "brand.html" . }}
           <nav class="group site-nav" role="navigation" aria-label="Site-wide navigation">
