@@ -14,6 +14,10 @@
 <link rel="authorization_endpoint" href="https://indieauth.com/auth">
 <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
 
+{{- with .Site.Params.microsub_url -}}
+    <link rel="microsub" href="{{ . }}">
+{{- end -}}
+
 {{ if .RelPermalink }}<link rel="amphtml" href="/amp{{ .RelPermalink }}">{{ end }}
 {{- if in (slice "taxonomy" "taxonomyTerm") .Kind }}
     <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title}} Feed for {{ .Title }}" href="{{ .Permalink }}index.xml">
