@@ -19,8 +19,8 @@
     <section class="content e-content" role="region" aria-label="Content">
       {{ .Content }}
       {{ partial "metaline.html" . }}
+      {{ partial "relationships.html" . }}
     </section>
-    {{ partial "relationships.html" . }}
     <section class="content" id="webmentions">
       {{ $mentions := .Scratch.Get "mentions" }}
       {{- if lt 0 (len $mentions.likes) }}
