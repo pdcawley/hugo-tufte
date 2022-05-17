@@ -374,6 +374,15 @@ article > header {
   }
 }
 
+main > article > section.e-content {
+  > *, > * > li {
+    padding-right: calc(33% + 0.75rem);
+  }
+  > .metaline {
+    padding-right: 0;
+  }
+}
+
 article section[role="summary"] > p{
   margin-top: 0.2rem;
   &:not(:first-of-type) {
@@ -485,39 +494,31 @@ main .MathJax_Display {
 /* Grid stuff. */
 
 body {
-  display: grid;
+  /* display: grid; */
   margin: 1rem calc(50vw - min(35vw, 600px));
   max-width: 1200px;
-  grid-template-columns: repeat(3,2fr);
-  grid-template-areas: "hd hd hd"
-                       "nv nv nv"
-                       "bd bd sb"
-                       "ft ft ft";
-  > .navbar {
-    grid-area: nv;
-  }
+  /* grid-template-columns: repeat(3,2fr);
+     grid-template-areas: "hd hd hd"
+     "nv nv nv"
+     "bd bd sb"
+     "ft ft ft"; */
+  /* > .navbar {
+     grid-area: nv;
+     }
 
-  > main {
-    grid-area: bd;
-  }
-
-  main::after {
-      content: "";
-      grid-area: sb
-  }
-
-  > footer {
-    grid-area: ft;
-  }
-}
-
-body.home {
-    grid-template-areas: "hd hd hd"
-                         "nv nv nv"
-                         "bd bd bd"
-                         "ft ft ft"
+     > main {
+     grid-area: bd;
+     } */
 
 }
+
+/* body.home {
+   grid-template-areas: "hd hd hd"
+   "nv nv nv"
+   "bd bd bd"
+   "ft ft ft"
+
+   } */
 
 section.footnotes {
     hr { margin-top: 1.5rem; }
