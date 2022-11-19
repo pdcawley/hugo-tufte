@@ -1,6 +1,6 @@
  <ul class="page-footer-menu">
     {{ range .Site.Menus.footer }}
-    <li><a href="{{.URL}}" rel="me">{{.Pre }}{{ .Name }}</a></li>
+    <li><a href="{{.URL}}" rel="me">{{.Pre }}{{ .Name | title }}</a></li>
     {{ end }}
 </ul>
 
