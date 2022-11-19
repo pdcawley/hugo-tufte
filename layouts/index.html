@@ -22,10 +22,10 @@
     {{ $paginator := .Paginate (where .Site.RegularPages "Type" "post") .Site.Params.pagination_size }}
     {{ range $index, $object := $paginator.Pages }}
     {{ with $object }}
-    {{ .Scratch.Set "index" $index }}
-    {{ partial "article-summary.html" . }}
-    {{- end }}
-    {{- end }}
+  {{ .Scratch.Set "index" $index }}
+  {{ .Render "index-summary" }}
+  {{- end }}
+  {{- end }}
 </section>
 <nav aria-hidden="true" class="paginator">
     {{- with $paginator }}
