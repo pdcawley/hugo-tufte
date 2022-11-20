@@ -1,5 +1,6 @@
 {{- with .Params.syndicate }}
 <section class="relationships">
+  <a href="https://brid.gy/publish/mastodon" class="bridgy"></a>
   {{- with $.Params.tweet }}
   <pre class="p-bridgy-twitter-content">{{ . }}</pre>
   <a class="bridgy" href="https://brid.gy/publish/twitter{{ with $.Params.omit_link }}?bridgy_omit_link={{ . }}{{ end }}"></a>
@@ -11,7 +12,7 @@
     {{- range $network, $permalink := . }}
     <li>
       <a rel="syndication" class="u-syndication" href="{{ $permalink }}">
-	<i class="fa fa-{{ $network }}"></i>
+    <i class="fa fa-{{ $network }}"></i>
       </a>
     </li>
     {{ end -}}
@@ -22,13 +23,17 @@
     {{- range . }}
     <li>
       <a href="{{ .url | safeURL }}" class="u-{{ .type }}">
-	{{- with .desc }}
-	{{ . }}
-	{{ end -}}
+    {{- with .desc }}
+    {{ . }}
+    {{ end -}}
       </a>
     </li>
     {{ end -}}
   </ul>
   {{ end -}}
+</section>
+{{ else -}}
+<section class="relationships">
+  <a href="https://brid.gy/publish/mastodon" class="bridgy"></a>
 </section>
 {{ end -}}
