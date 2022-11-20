@@ -6,10 +6,9 @@
     {{ .Params.description | .Page.RenderString $blockOpt }}
   {{- else }}
     {{ if findRE "^ *<p>" .Summary }}
-      {{ .Summary }}
+      {{ .Summary | safeHTML }}
     {{ else }}
       {{ .Summary | .Page.RenderString $blockOpt | safeHTML }}
     {{ end }}
   {{- end -}}
-  {{ partial "relationships.html" . }}
 </section>
