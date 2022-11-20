@@ -15,9 +15,10 @@
           {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
     </header>
-    {{ partial "summary-section.html" . }}
     <section class="content e-content" role="region" aria-label="Content">
       {{ .Content }}
+    </section>
+    <section class="content meta">
       {{ partial "metaline.html" . }}
       {{ partial "relationships.html" . }}
     </section>
@@ -27,9 +28,9 @@
       <h3>Likes</h3>
       {{ $.Scratch.Set "class" "p-like" }}
       <ul class=facepile>
-	{{ range $mentions.likes }}
-	{{ partial "facepile-entry.html" . }}
-	{{ end }}
+    {{ range $mentions.likes }}
+    {{ partial "facepile-entry.html" . }}
+    {{ end }}
       </ul>
       <div style="clear:both;"></div>
       {{ end -}}
@@ -38,9 +39,9 @@
       <h3>Reposts</h3>
       {{ $.Scratch.Set "class" "p-repost" }}
       <ul class=facepile>
-	{{ range $mentions.reposts }}
-	{{ partial "facepile-entry.html" . }}
-	{{ end }}
+    {{ range $mentions.reposts }}
+    {{ partial "facepile-entry.html" . }}
+    {{ end }}
       </ul>
       <div style="clear:both;"></div>
       {{ end -}}
@@ -48,39 +49,39 @@
       {{ if lt 0 (len $mentions.replies) }}
       <h3>Replies</h3>
       <ul id="replies">
-	  {{ range $mentions.replies }}
-	  {{ $time := time "2000-04-01" }}
-	  {{ with .published }}
-	  {{ $time = time . }}
-	  {{ else }}
-	  {{ $time = time (index . "wm-received") }}
-	  {{ end }}
-	  <li class="p-comment h-cite comment">
-	    {{ with .author }}
-	    {{ partial "author.html" . }}
-	    {{ end }}
-	    {{ partial "wm-content.html" . }}
-	    {{ partial "wm-metaline.html" . }}
-	  </li>
-	  {{ end }}
+      {{ range $mentions.replies }}
+      {{ $time := time "2000-04-01" }}
+      {{ with .published }}
+      {{ $time = time . }}
+      {{ else }}
+      {{ $time = time (index . "wm-received") }}
+      {{ end }}
+      <li class="p-comment h-cite comment">
+        {{ with .author }}
+        {{ partial "author.html" . }}
+        {{ end }}
+        {{ partial "wm-content.html" . }}
+        {{ partial "wm-metaline.html" . }}
+      </li>
+      {{ end }}
       </ul>
       <div style="clear:both;"></div>
       {{ end }}
       {{ if lt 0 (len (append $mentions.mentions $mentions.others)) }}
       <h3>Other Mentions</h3>
       <ul id="other-mentions">
-	{{ range $mentions.mentions | append $mentions.others }}
-	{{ if lt 0 (len (index .author "url")) }}
-	<li class="p-comment h-cite comment">
-	  {{ with .author }}
-	  {{ partial "author.html" . }}
-	  {{ end }}
-	  {{ partial "wm-content.html" . }}
-	  {{ partial "wm-metaline.html" . }}
-	  
-	</li>
-	{{ end }}
-	{{ end }}
+    {{ range $mentions.mentions | append $mentions.others }}
+    {{ if lt 0 (len (index .author "url")) }}
+    <li class="p-comment h-cite comment">
+      {{ with .author }}
+      {{ partial "author.html" . }}
+      {{ end }}
+      {{ partial "wm-content.html" . }}
+      {{ partial "wm-metaline.html" . }}
+
+    </li>
+    {{ end }}
+    {{ end }}
       </ul>
       <div style="clear:both;"></div>
       {{ end }}
