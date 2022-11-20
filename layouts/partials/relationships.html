@@ -1,6 +1,7 @@
 {{- with .Params.syndicate }}
 <section class="relationships">
   <a href="https://brid.gy/publish/mastodon" class="bridgy"></a>
+  <a href="https://fed.brid.gy"></a>
   {{- with $.Params.tweet }}
   <pre class="p-bridgy-twitter-content">{{ . }}</pre>
   <a class="bridgy" href="https://brid.gy/publish/twitter{{ with $.Params.omit_link }}?bridgy_omit_link={{ . }}{{ end }}"></a>
