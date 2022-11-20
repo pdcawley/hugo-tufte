@@ -15,6 +15,7 @@
           {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
     </header>
+    {{ partial "summary-section.html" . }}
     <section class="content e-content" role="region" aria-label="Content">
       {{ .Content }}
     </section>

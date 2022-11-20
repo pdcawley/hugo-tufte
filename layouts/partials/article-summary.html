@@ -2,7 +2,7 @@
 {{ partial "init-article-metadata.html" . }}
 <article class="h-entry">
     <header>
-        <h2 class="p-name"><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
+        <h2 class="p-name"><a accesskey="{{ mod (add 1 $index) 10 }}" href="{{ .RelPermalink }}" class="u-url u-uid" id="ctrl+mod+{{ $index }}" rel="bookmark"><cite>{{ .Title }}</cite></a></h2>
         {{- if .Params.tags }}
         <ul aria-label="Tags" class="tags">
             {{- range .Params.tags }}
@@ -12,11 +12,12 @@
         {{ end }}
     </header>
     {{ partial "summary-section.html" . }}
+    {{ partial "relationships.html" . }}
     {{ partial "metaline.html" . }}
     <footer>
       <p class="colophon">Written by <span class="p-author hcard">{{ .Site.Params.author | safeHTML }}</span> on
         {{ with .Date }}<time class="dt-published" aria-label="Published On" datetime="{{ dateFormat $.Site.Params.iso8601_format . }}">{{ dateFormat "2006-01-02" . }}</time> {{- end }}
       </p>
-      <p class='read-more'><a class="u-url u-uid" href="{{ .RelPermalink }}">Read more…</a></p>
-    </footer>
+      <p class='read-more'><a class="" href="{{ .RelPermalink }}">Read more…</a></p>
+   </footer>
 </article>
