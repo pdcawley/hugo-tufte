@@ -10,14 +10,15 @@
            title="Homepage of {{ .Site.Title }}"
            aria-label="Homepage of {{ .Site.Title }}">Just a Summary</a>
     </h1>
+    {{- with .Site.Params.Author -}}
     <p class="description">
 
-        The personal website of <span class="p-name">{{ .Site.Params.author | safeHTML }}</span> (<span class="p-x-pronoun-nominative">they</span>/<span class="p-x-pronoun-oblique">him</span>) <br>
-        <span class="bullet">—</span>
-        <span class="p-note"><span class="p-role">Folk singer</span>, photographer, carer and occasional programmer.
-        </span>
+      The personal > (<span class="p-x-pronoun-nominative">{{ .pronouns.nominative }}</span>/<span class="p-x-pronoun-oblique">{{ .pronouns.oblique }}</span>) <br>
+      <span class="bullet">—</span>
+      <span class="p-note">{{ .note_html | safeHTML }}</span>
     </p>
 
     <figure><img class="u-photo" src="/images/whoami/avatar.jpg" alt="" /></figure>
 
+    {{- end -}}
 </div>
