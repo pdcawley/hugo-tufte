@@ -124,6 +124,16 @@ support all the features present in the [Tufte-css](https://github.com/edwardtuf
 For usage and examples, refer to [./exampleSite/content/posts/tufte-features.md ](https://github.com/loikein/hugo-tufte/blob/main/exampleSite/content/posts/tufte-features.md).
 
 - `blockquote`
+  - **Description**: Wrap text in a blockquote and insert optional
+  `cite` or `footer` metadata.
+  - **Usage**: Accepts the named parameters `cite` and `footer`.
+  - **Example**:
+  ```html
+  {{% blockquote cite="www.shawnohare.com" footer="Shawn" %}}
+    There is nothing more beautiful than an elegant mathematical proof.
+  {{% /blockquote %}}`
+  ```
+
 - `div`
 - `epigraph`
 - `marginnote`
